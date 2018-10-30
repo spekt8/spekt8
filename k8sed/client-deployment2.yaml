@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-deployment2
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      component: web2
+  template:
+    metadata:
+      labels:
+        component: web2
+    spec:
+      containers:
+        - name: clienter
+          image: hello-world
+          ports:
+            - containerPort: 3050
