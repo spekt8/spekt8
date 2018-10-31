@@ -11,6 +11,12 @@ const k8sApi = kc.makeApiClient(k8s.Core_v1Api);
 // use statements
 app.use(bodyParser.json());
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.get('/', (req, res) => {
   k8sApi.listNamespacedPod('default')
     .then((re) => {
@@ -20,15 +26,20 @@ app.get('/', (req, res) => {
       // for (let i = 0; i < re.body.items.length; i += 1) {
       //   console.log(re.body.items[i].spec.containers);
       // }
-      
-      res.send(JSON.stringify(re.body, null, 2));
+      res.json(re.body);
     });
-  
+});
+
+app.get('/service', (req, res) => {
+  k8sApi.listNamespacedService('default')
+    .then((re) => {
+      res.json(re.body);
+    });
 });
 
 
 // server listening
-app.listen(8080, (err) => {
+app.listen(3000, (err) => {
   if (err) console.log(err);
-  else console.log('Listening on port 8080....');
+  else console.log('Listening on port 3000....');
 });
