@@ -37,6 +37,13 @@ app.get('/service', (req, res) => {
     });
 });
 
+// app.get('/ingress', (req, res) => {
+//   k8sApi.listNamespacedIngress('default')
+//     .then((re) => {
+//       res.json(re.body);
+//     });
+// });
+
 
 // server listening
 app.listen(3000, (err) => {

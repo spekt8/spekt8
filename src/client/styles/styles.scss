@@ -1,0 +1,23 @@
+.modalContainer {
+    background: rgba(105, 181, 202, 0.8);
+}
+
+.closeButton:hover {
+    background: rgba(105, 181, 202, 0.8);
+    color:white;
+}
+
+.closeButton {
+    width: 100%;
+    display: block;
+    height: 50px;
+    color:rgba(105, 181, 202, 0.8);
+    font-size: 14pt;
+    font-family:sans-serif;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.containerinfo {
+    text-decoration: underline;
+}
