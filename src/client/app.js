@@ -6,7 +6,7 @@ import Modal from 'react-modal';
 // React-modal details
 const customStyles = {
   content : {
-    top: '80%',
+    top: '78%',
     left: '82%',
     right: 'auto',
     bottom: 'auto',
@@ -27,7 +27,7 @@ var options = {
 				enabled: true,
 				levelSeparation: 100,
 				nodeSpacing: 200,
-				treeSpacing: 150,
+				treeSpacing: 100,
 				blockShifting: true,
 				edgeMinimization: true,
 				parentCentralization: true,
@@ -126,6 +126,8 @@ class App extends React.Component {
 					podIP: foundNode.podIP,
 					containerName: foundNode.containerName,
 					containerImage: foundNode.containerImage,
+					volumeName: foundNode.volumename,
+					pvcName: foundNode.pvcname,
 				}
 			})
 		} else if (foundNode.kind === "Service") {
@@ -138,6 +140,16 @@ class App extends React.Component {
 					port: foundNode.port,
 					targetPort: foundNode.targetPort,
 					clusterIP: foundNode.clusterIP,
+				}
+			})
+		} else if (foundNode.kind === "Ingress") {
+			this.setState(prevState => {
+				return {
+					modalIsOpen: true,
+					kind: foundNode.kind,
+					name: foundNode.name,
+					services: foundNode.services,
+					timeStamp: foundNode.timeStamp,
 				}
 			})
 		} 
@@ -158,12 +170,12 @@ class App extends React.Component {
 					})
 					.then((serviceObject) => {
 						console.log('serviceobject',serviceObject);
-						// fetch('http://localhost:3000/ingress')
-						  // .then((ingressData) => {
-						// 		return ingressData.json();
-						// 	})
-						// 	.then((ingressObject) => {
-								// console.log('ingressobject',ingressObject);
+						fetch('http://localhost:3000/ingress')
+						  .then((ingressData) => {
+								return ingressData.json();
+							})
+							.then((ingressObject) => {
+								console.log('ingressobject',ingressObject);
 								// this creates a copy of the state 
 								const newGraph = Object.assign({}, this.state.graph);
 								newGraph.nodes = this.state.graph.nodes.slice();
@@ -172,6 +184,7 @@ class App extends React.Component {
 								// place service list and pod list into separate variables
 								const serviceArray = [];
 								const podArray = [];
+								const ingressArray = [];
 
 								// this loop cycles through the service list and assigns them to their own boxes
 								// console.log('serviceobject',serviceObject);
@@ -208,6 +221,10 @@ class App extends React.Component {
 										newPodObject.containerName = podObject.items[i].spec.containers[j].name; // need to loop if multiple containers though
 										newPodObject.containerImage = podObject.items[i].spec.containers[j].image; // need to loop if multiple containers though
 									}
+									newPodObject.volumename = podObject.items[i].spec.volumes[0].name;
+									if (podObject.items[i].spec.volumes[0].persistentVolumeClaim) {
+										newPodObject.pvcname = podObject.items[i].spec.volumes[0].persistentVolumeClaim.claimName;
+									}
 									newPodObject.labels = podObject.items[i].metadata.labels; // pod label
 									newPodObject.metadataName = podObject.items[i].metadata.name;
 									newPodObject.timeStamp = podObject.items[i].metadata.creationTimestamp;
@@ -216,6 +233,31 @@ class App extends React.Component {
 									newPodObject.podIP = podObject.items[i].status.podIP;
 									newGraph.nodes.push(newPodObject);
 									podArray.push(newPodObject);
+								}
+
+								// this loops through the ingress object and saves to another array
+								for (let i = 0; i < ingressObject.items.length; i+=1) {
+									const newIngressObject = {};
+									newIngressObject.id = i + 100;
+									newIngressObject.kind = "Ingress";
+									newIngressObject.label = "Ingress";
+									newIngressObject.timeStamp = ingressObject.items[i].metadata.creationTimestamp; // ingress timestamp
+									newIngressObject.name = ingressObject.items[i].metadata.name; // ingress name 
+									// loop through to save the different services within the ingress object
+									let servicePath = ingressObject.items[i].spec.rules[0].http.paths;
+									newIngressObject.services = [];
+									for (let j = 0; j < servicePath.length; j+=1) {
+										const serviceObj = {};
+										serviceObj.serviceName = servicePath[j].backend.serviceName;
+										serviceObj.servicePort = servicePath[j].backend.servicePort;
+										newIngressObject.services.push(serviceObj);
+									}
+									// design the ingress node
+									newIngressObject.shape = "diamond";
+									newIngressObject.color = "teal";
+									console.log('newingressobject',newIngressObject);
+									newGraph.nodes.push(newIngressObject);
+									ingressArray.push(newIngressObject);
 								}
 								// console log the current state of pods and services
 								console.log('state',newGraph.nodes);
@@ -238,12 +280,28 @@ class App extends React.Component {
 											}
 										}
 									}
-								}	
+								}
+								
+								// this checks whether the service is listed in an ingress object
+								// console.log('ingressArray',ingressArray);
+								// console.log('serviceArray',serviceArray);
+								for (let j = 0; j < ingressArray[0].services.length; j+=1) {
+									for (let k = 0; k < serviceArray.length; k+=1) {
+										// console.log(ingressArray[0].services[j])
+										// console.log(serviceArray[k].label)
+										if ((ingressArray[0].services[j].serviceName === serviceArray[k].label) && (ingressArray[0].services[j].servicePort === serviceArray[k].port)) {
+											const newEdge2 = {
+												from: ingressArray[0].id,
+												to: serviceArray[k].id
+											}
+											newGraph.edges.push(newEdge2);
+										}
+									}
+								}
 								this.setState({
 									graph: newGraph
 								}) 
-							// })
-													
+							})				
 					})
 			})
 	}
@@ -273,8 +331,36 @@ class App extends React.Component {
 				<div>Host IP: {this.state.hostIP}</div>
 				<br/>
 				<div className="containerinfo">Containers<br/></div>
-				<div>&nbsp;&nbsp;Name: {this.state.containerName}</div>
-				<div>&nbsp;&nbsp;Image: {this.state.containerImage}</div>
+				<div>Name: {this.state.containerName}</div>
+				<div>Image: {this.state.containerImage}</div>
+				<br/>
+				<div className="PVC">Volumes</div>
+				<div>Name: {this.state.volumeName}</div>
+				<div>PVC: {this.state.pvcName ? this.state.pvcName : "Not applicable"}</div>
+        <button className="closeButton" onClick={this.closeModal}>close</button>
+      </Modal>
+		} else if (this.state.kind === "Ingress") {
+			console.log('service',this.state.services);
+			type = 
+			<Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} style={customStyles}>
+        <h2 ref={subtitle => this.subtitle = subtitle}>{this.state.kind}</h2>
+        <div>Name: {this.state.name}</div>
+				<div>Created on: {this.state.timeStamp}</div>
+				<br/>
+				<div className="serviceLeft">Services 
+					<ul>
+				  	{this.state.services.map((obj,i) => {
+						return <li key={i}>{obj.serviceName} {obj.servicePort}</li>
+						})}
+					</ul>
+				</div>
+				{/* <div className="serviceRight">Service Port 
+					<ul>
+				  	{this.state.services.map((obj,i) => {
+						return <li key={i}>{obj.servicePort}</li>
+						})}
+					</ul>
+				</div> */}
         <button className="closeButton" onClick={this.closeModal}>close</button>
       </Modal>
 		}
