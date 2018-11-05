@@ -45,7 +45,7 @@ app.get('/ingress', (req, res) => {
     });
 });
 
-app. get('/deployment', (req, res) => {
+app.get('/deployment', (req, res) => {
   k8sApi2.listNamespacedDeployment('default')
     .then((re) => {
       res.json(re.body);

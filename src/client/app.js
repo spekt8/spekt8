@@ -283,7 +283,7 @@ class App extends React.Component {
 								}
 								
 								// this checks whether the service is listed in an ingress object
-								// console.log('ingressArray',ingressArray);
+								console.log('ingressArray',ingressArray);
 								// console.log('serviceArray',serviceArray);
 								for (let j = 0; j < ingressArray[0].services.length; j+=1) {
 									for (let k = 0; k < serviceArray.length; k+=1) {
@@ -367,7 +367,10 @@ class App extends React.Component {
 		  
 		return (
 		<div>
-			<h1>SPECT8: Visualization Tool for Kubernetes</h1>
+			<div className="header">
+				<a href="https://github.com/spekt8/spekt8" className="logo">SPECT8</a>
+			</div>
+			<h1>Visualization Tool for Kubernetes</h1>
 			<Graph graph={this.state.graph} options={options} events={this.state.events} />;
 			{type}
 		</div>
