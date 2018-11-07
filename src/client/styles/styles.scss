@@ -1,3 +1,11 @@
+// reset
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
 .modalContainer {
     background: rgba(105, 181, 202, 0.8);
 }
@@ -34,5 +42,40 @@
     float:right;
 }
 
+// Header
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid black;
+}
 
 
+// Main Body
+.main {
+    display: flex;
+    justify-content: flex-start;
+}
+
+    .leftPanel {
+        width: 15%;
+        height: 100vh;
+        border: 2px solid blue;
+    }
+
+        .legend {
+            height: 40%;
+            border: 1px solid black;
+        }
+        .monitoring {
+            height: 25%;
+            border: 1px solid black;
+        }
+        .directions {
+            height: 35%;
+            border: 1px solid black;
+        }
+    
+    .rightSide {
+        width: 85%;
+    }
