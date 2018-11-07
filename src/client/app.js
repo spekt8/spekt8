@@ -1,12 +1,13 @@
 import React from 'react';
 import Graph from 'react-graph-vis';
-import Infobox from './infobox';
 import Modal from 'react-modal';
+import Header from './components/header';
+import LeftPanel from './components/leftPanel';
 
 // React-modal details
 const customStyles = {
   content : {
-    top: '78%',
+    top: '75%',
     left: '82%',
     right: 'auto',
     bottom: 'auto',
@@ -55,11 +56,16 @@ var options = {
     edges: {
 			color: "#000000",
 		},
-		width: '1800px',
-		height: '1000px',
+		width: '100%',
+		height: '100%',
 		nodes: {
-			shape: 'hexagon',
-			size: 20,
+			shape: 'icon',
+			icon: {
+				face: '"Font Awesome 5 Free"',
+				code: '\uf466',
+				size: 30,
+				color: 'black'
+			},
 		},
 		
 };
@@ -77,20 +83,6 @@ class App extends React.Component {
 			events: {
 				select: this.selectItem
 			},
-
-			// // used to label pods
-			// metadataName: '',
-			// statusPhase: '',
-			// kind: '',
-
-			// //used to label services
-			// label: '',
-			// timeStamp: '',
-			// port: '',
-			// targetPort: '',
-			// clusterIP: '',
-
-			// modal state
 			modalIsOpen: false
 		};
 		this.openModal = this.openModal.bind(this);
@@ -285,19 +277,22 @@ class App extends React.Component {
 								// this checks whether the service is listed in an ingress object
 								console.log('ingressArray',ingressArray);
 								// console.log('serviceArray',serviceArray);
-								for (let j = 0; j < ingressArray[0].services.length; j+=1) {
-									for (let k = 0; k < serviceArray.length; k+=1) {
-										// console.log(ingressArray[0].services[j])
-										// console.log(serviceArray[k].label)
-										if ((ingressArray[0].services[j].serviceName === serviceArray[k].label) && (ingressArray[0].services[j].servicePort === serviceArray[k].port)) {
-											const newEdge2 = {
-												from: ingressArray[0].id,
-												to: serviceArray[k].id
+								if (ingressArray[0]) {
+									for (let j = 0; j < ingressArray[0].services.length; j+=1) {
+										for (let k = 0; k < serviceArray.length; k+=1) {
+											// console.log(ingressArray[0].services[j])
+											// console.log(serviceArray[k].label)
+											if ((ingressArray[0].services[j].serviceName === serviceArray[k].label) && (ingressArray[0].services[j].servicePort === serviceArray[k].port)) {
+												const newEdge2 = {
+													from: ingressArray[0].id,
+													to: serviceArray[k].id
+												}
+												newGraph.edges.push(newEdge2);
 											}
-											newGraph.edges.push(newEdge2);
 										}
 									}
 								}
+								
 								this.setState({
 									graph: newGraph
 								}) 
@@ -308,8 +303,9 @@ class App extends React.Component {
 
 	render() {
 		let type;
-		if(this.state.kind === "Service") {
-			type = 
+		if (this.state.kind === "Service") {
+			console.log(this.state.modalIsOpen);
+			type =
 			<Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} style={customStyles} >
 				<h2 ref={subtitle => this.subtitle = subtitle}>{this.state.kind}</h2>
 				<div>Name: {this.state.label}</div>
@@ -367,12 +363,18 @@ class App extends React.Component {
 		  
 		return (
 		<div>
-			<div className="header">
-				<a href="https://github.com/spekt8/spekt8" className="logo">SPECT8</a>
+			<Header />
+
+			<div className="main">
+				{/* Left Panel of the Visualizer */}
+				<LeftPanel />
+
+				{/* Right Panel of the Visualizer */}
+				<div className="rightSide">
+					<Graph graph={this.state.graph} options={options} events={this.state.events} />
+					{type}
+				</div>
 			</div>
-			<h1>Visualization Tool for Kubernetes</h1>
-			<Graph graph={this.state.graph} options={options} events={this.state.events} />;
-			{type}
 		</div>
 		)
 	}
