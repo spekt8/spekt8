@@ -1,36 +1,13 @@
 import React from 'react';
 import Graph from 'react-graph-vis';
 import Modal from 'react-modal';
-// import Header from './components/header';
-// import LeftPanel from './components/leftPanel';
-
-// material ui
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
-import styles from './supplement/drawerStyles';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { createMuiTheme } from '@material-ui/core/styles';
-
-const theme = createMuiTheme({
-  typography: {
-    useNextVariants: true,
-  },
-});
+import Header from './components/header';
+import LeftPanel from './components/leftPanel';
 
 // React-modal details
 const customStyles = {
   content : {
-    top: '70%',
+    top: '75%',
     left: '82%',
     right: 'auto',
     bottom: 'auto',
@@ -99,51 +76,30 @@ var options = {
 
 class App extends React.Component {
   constructor(props) {
-		super(props);
-		
-		// our state object
+    super(props);
 		this.state = {
-			// graph represents our component
 			graph: {
 				nodes: [],
 				edges: []
 			},
 			nodeSelected: false,
-
 			// pass events object down to our render method which will invoke our selectItem method
 			events: {
 				select: this.selectItem
 			},
-			modalIsOpen: false,
-
-			// drawer states
-			open: true,
-    	anchor: 'left',
+			modalIsOpen: false
 		};
 		this.openModal = this.openModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
 	}
 
-	// Modal Functions
 	openModal() {
 		this.setState({modalIsOpen: true});
 	}
+
 	closeModal() {
 		this.setState({modalIsOpen: false});
 	}
-
-	// Drawer Functions
-	handleDrawerOpen = () => {
-    this.setState({ open: true });
-  };
-  handleDrawerClose = () => {
-    this.setState({ open: false });
-  };
-  handleChangeAnchor = event => {
-    this.setState({
-      anchor: event.target.value,
-    });
-  };
 
 	// when an item is selected, it will open a modal window and show information related to that item 
 	selectItem = (event) => {
@@ -195,7 +151,6 @@ class App extends React.Component {
 		} 
 	}
 	
-	// when component is rendered, create fetch request
 	componentDidMount() {
 		// this fetch receives the pod list
 		fetch('http://localhost:3000')
@@ -351,40 +306,6 @@ class App extends React.Component {
 	}
 
 	render() {
-		// gets the state and props for drawer
-		const { classes, theme } = this.props;
-    const { anchor, open } = this.state;
-
-		// creates the drawer component
-		const drawer = (
-      <Drawer
-        variant="persistent"
-        anchor={anchor}
-        open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={this.handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </div>
-
-        {/* this is where you write for the inside of the drawer */}
-        <Divider />
-        <List>hey yo</List>
-        <Divider />
-        <List>dsafsd</List>
-      </Drawer>
-		);
-		let before = null;
-    let after = null;
-    if (anchor === 'left') {
-      before = drawer;
-    } 
-
-		// Modal - checks the type of Object when selected
 		let type;
 		if (this.state.kind === "Service") {
 			console.log(this.state.modalIsOpen);
@@ -445,69 +366,22 @@ class App extends React.Component {
 		}
 		  
 		return (
-			<div className={classes.root}>
-        <div className={classes.appFrame}>
-          <AppBar
-            className={classNames(classes.appBar, {
-              [classes.appBarShift]: open,
-              [classes[`appBarShift-${anchor}`]]: open,
-            })}
-          >
-            <Toolbar disableGutters={!open}>
-              <IconButton
-                color="inherit"
-                aria-label="Open drawer"
-                onClick={this.handleDrawerOpen}
-                className={classNames(classes.menuButton, open && classes.hide)}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" color="inherit" noWrap>
-                Persistent drawer
-              </Typography>
-            </Toolbar>
-          </AppBar>
-          {before}
-          <main
-            className={classNames(classes.content, classes[`content-${anchor}`], {
-              [classes.contentShift]: open,
-              [classes[`contentShift-${anchor}`]]: open,
-            })}
-          >
-            <div className={classes.drawerHeader} />
-            {/* right side should go over here */}
-            <div className="rightSide">
-							<Graph graph={this.state.graph} options={options} events={this.state.events} />
-							{type}
-						</div>
-          </main>
-          {after}
-        </div>
-      </div>
+		<div>
+			<Header />
 
-		// <div>
-		// 	<Header />
+			<div className="main">
+				{/* Left Panel of the Visualizer */}
+				<LeftPanel />
 
-		// 	<div className="main">
-		// 		{/* Left Panel of the Visualizer */}
-		// 		<LeftPanel />
-
-		// 		{/* Right Panel of the Visualizer */}
-		// 		<div className="rightSide">
-		// 			<Graph graph={this.state.graph} options={options} events={this.state.events} />
-		// 			{type}
-		// 		</div>
-		// 	</div>
-		// </div>
+				{/* Right Panel of the Visualizer */}
+				<div className="rightSide">
+					<Graph graph={this.state.graph} options={options} events={this.state.events} />
+					{type}
+				</div>
+			</div>
+		</div>
 		)
 	}
 }
 
-App.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles, { withTheme: true })(App);
-
-// export default App;
+export default App;
