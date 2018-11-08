@@ -1,22 +1,79 @@
 import React from 'react';
 
-const Directions = () => (
-  <div className="directions">
-    <h3>Directions</h3>
+// material ui
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import ArrowDropUp from '@material-ui/icons/ArrowDropUp';
+import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
+import ArrowLeft from '@material-ui/icons/ArrowLeft';
+import ArrowRight from '@material-ui/icons/ArrowRight';
+import ZoomIn from '@material-ui/icons/ZoomIn';
+import ZoomOut from '@material-ui/icons/ZoomOut';
 
-    <div className="directions-topRow">
-      <div>Zoom Out</div>
-      <div>Up</div>
-      <div>Zoom In</div>
+const styles = theme => ({
+  title: {
+    margin: theme.spacing.unit,
+    padding: theme.spacing.unit,
+    textAlign: 'center'
+  },
+  arrowSize: {
+    width: 40,
+    height: 40,
+  }
+});
+
+const Directions = (props) => {
+  const { classes } = props;
+
+  return (
+    <div className="directions">
+      {/* Title */}
+      <Typography variant="h6" className={classes.title}>Directions</Typography>
+
+      {/* Top Row for Arrows */}
+      <Grid container 
+        direction="row"
+        justify="space-around"
+        alignItems="center"
+        spacing={24}
+      >
+        <Grid item xs>
+          <ZoomOut />
+        </Grid>
+        <Grid item xs>
+          <ArrowDropUp className={classes.arrowSize}/>
+        </Grid>
+        <Grid item xs>
+          <ZoomIn />
+        </Grid>
+      </Grid>
+
+      {/* Bottom Row for Arrows */}
+      <Grid container 
+        direction="row"
+        justify="space-around"
+        alignItems="center"
+        spacing={24}
+      >
+        <Grid item xs>
+          <ArrowLeft className={classes.arrowSize}/>
+        </Grid>
+        <Grid item xs>
+          <ArrowDropDown className={classes.arrowSize}/>
+        </Grid>
+        <Grid item xs>
+          <ArrowRight className={classes.arrowSize}/>
+        </Grid>
+      </Grid>
+      
     </div>
+  )
+};
 
-    <div className="directions-bottomRow">
-      <div>Left</div>
-      <div>Down</div>
-      <div>Right</div>
-    </div>
-    
-  </div>
-);
+Directions.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
-export default Directions;
+export default withStyles(styles)(Directions);

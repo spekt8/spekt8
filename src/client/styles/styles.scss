@@ -5,14 +5,20 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: Roboto;
+}
 
 .modalContainer {
-    background: rgba(105, 181, 202, 0.8);
+    background: rgba(55, 145, 170, 0.8);
 }
+
 
 .closeButton:hover {
     background: rgba(105, 181, 202, 0.8);
     color:white;
+    // color:rgb(235, 235, 235);
+
 }
 
 .closeButton {
@@ -81,3 +87,13 @@
     .rightSide {
         height: 100%;
     }
+
+        .monitoring {
+            height: 25%;
+            padding: 0 15px;
+        }
+
+        .directions {
+            padding: 0 25px;
+            text-align: center;
+        }

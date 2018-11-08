@@ -32,6 +32,23 @@ const styles = theme => ({
   'appBarShift-right': {
     marginRight: drawerWidth,
   },
+  button: {
+    margin: theme.spacing.unit,
+    marginLeft: 0,
+    marginRight: 0,
+    width: '100%',
+  },
+  github: {
+    width: 40,
+    height: 40,
+    margin: 10,
+  },
+  githubWrapper: {
+    backgroundColor: 'rgb(240, 240, 240)',
+    height: '100%',
+    width: 60,
+    border: 'none',
+  },
   menuButton: {
     marginLeft: 12,
     marginRight: 20,
@@ -53,7 +70,6 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    // padding: theme.spacing.unit * 3,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
