@@ -1,44 +1,41 @@
 import React from 'react';
 import Graph from 'react-graph-vis';
 import Modal from 'react-modal';
-// import Header from './components/header';
-// import LeftPanel from './components/leftPanel';
+
+// component imports
+import LeftPanel from './components/leftPanel';
 
 // material ui
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import styles from './supplement/drawerStyles';
-import Drawer from '@material-ui/core/Drawer';
+import styles from './styles/drawerStyles';
 import AppBar from '@material-ui/core/AppBar';
+import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { createMuiTheme } from '@material-ui/core/styles';
+
 
 const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
-  },
+	},
 });
 
 // React-modal details
 const customStyles = {
   content : {
-    top: '70%',
-    left: '82%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-		transform: 'translate(-50%, -50%)',
-		background: 'rgba(105, 181, 202, 0.8)',
+    top: 'auto',
+    left: '73%',
+		right: '2%',
+    bottom: '5%',
+		background: 'rgba(55, 145, 170, 0.8)',
 		color: 'white',
-		fontFamily: 'sans-serif',
+		fontFamily: 'Roboto',
   }
 };
 
@@ -46,6 +43,7 @@ Modal.setAppElement(document.getElementById('index'))
 
 // React-graph-vis details
 var options = {
+		autoResize: true,
     layout: {
       hierarchical: {
 				enabled: true,
@@ -122,6 +120,9 @@ class App extends React.Component {
 		};
 		this.openModal = this.openModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
+		this.handleDrawerClose = this.handleDrawerClose.bind(this);
+		this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
+		this.handleChangeAnchor = this.handleChangeAnchor.bind(this);
 	}
 
 	// Modal Functions
@@ -355,33 +356,20 @@ class App extends React.Component {
 		const { classes, theme } = this.props;
     const { anchor, open } = this.state;
 
-		// creates the drawer component
-		const drawer = (
-      <Drawer
-        variant="persistent"
-        anchor={anchor}
-        open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={this.handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </div>
-
-        {/* this is where you write for the inside of the drawer */}
-        <Divider />
-        <List>hey yo</List>
-        <Divider />
-        <List>dsafsd</List>
-      </Drawer>
+		// creates the drawer/left-panel component
+		const leftPanel = (
+			<LeftPanel 
+				anchor={this.state.anchor} 
+				open={this.state.open} 
+				classes={classes} 
+				theme={theme}
+				handleDrawerClose={this.handleDrawerClose}
+			/>
 		);
 		let before = null;
     let after = null;
     if (anchor === 'left') {
-      before = drawer;
+      before = leftPanel;
     } 
 
 		// Modal - checks the type of Object when selected
@@ -397,7 +385,14 @@ class App extends React.Component {
 				<div>Port: {this.state.port}</div>
 				<div>Target Port: {this.state.targetPort}</div>
 				<div>Cluster IP: {this.state.clusterIP}</div>
-				<button className="closeButton" onClick={this.closeModal}>close</button>
+				<Button 
+					variant="contained" 
+					color="default" 
+					onClick={this.closeModal} 
+					className={classes.button}
+				>
+					Close
+				</Button>
 			</Modal> 
 		} else if (this.state.kind === "Pod") {
 			type = 
@@ -416,7 +411,14 @@ class App extends React.Component {
 				<div className="PVC">Volumes</div>
 				<div>Name: {this.state.volumeName}</div>
 				<div>PVC: {this.state.pvcName ? this.state.pvcName : "Not applicable"}</div>
-        <button className="closeButton" onClick={this.closeModal}>close</button>
+        <Button 
+					variant="contained" 
+					color="default" 
+					onClick={this.closeModal} 
+					className={classes.button}
+				>
+					Close
+				</Button>
       </Modal>
 		} else if (this.state.kind === "Ingress") {
 			console.log('service',this.state.services);
@@ -440,34 +442,55 @@ class App extends React.Component {
 						})}
 					</ul>
 				</div> */}
-        <button className="closeButton" onClick={this.closeModal}>close</button>
+        <Button 
+					variant="contained" 
+					color="default" 
+					onClick={this.closeModal} 
+					className={classes.button}
+				>
+					Close
+				</Button>
       </Modal>
 		}
 		  
 		return (
 			<div className={classes.root}>
         <div className={classes.appFrame}>
+
+					{/* Top Header Portion */}
           <AppBar
             className={classNames(classes.appBar, {
               [classes.appBarShift]: open,
               [classes[`appBarShift-${anchor}`]]: open,
             })}
           >
-            <Toolbar disableGutters={!open}>
-              <IconButton
-                color="inherit"
-                aria-label="Open drawer"
-                onClick={this.handleDrawerOpen}
-                className={classNames(classes.menuButton, open && classes.hide)}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" color="inherit" noWrap>
-                Persistent drawer
-              </Typography>
-            </Toolbar>
+						<Grid
+							container
+							direction="row"
+							justify="space-between"
+							alignItems="center"
+						>
+							<Toolbar disableGutters={!open}>
+								<IconButton
+									color="inherit"
+									aria-label="Open drawer"
+									onClick={this.handleDrawerOpen}
+									className={classNames(classes.menuButton, open && classes.hide)}
+								>
+									<MenuIcon />
+								</IconButton>
+								<Typography variant="h6" color="inherit" noWrap>
+									Kubernetes Visualization Tool
+								</Typography>
+							</Toolbar>
+							<div className={classes.githubWrapper}>
+								<a href="https://github.com/spekt8/spekt8" target="_blank">
+									<img className={classes.github} src={require('./../assets/images/GitHub-Mark-120px-plus.png')}/>
+								</a>
+							</div>
+						</Grid>
           </AppBar>
-          {before}
+					{before}
           <main
             className={classNames(classes.content, classes[`content-${anchor}`], {
               [classes.contentShift]: open,
@@ -475,30 +498,18 @@ class App extends React.Component {
             })}
           >
             <div className={classes.drawerHeader} />
-            {/* right side should go over here */}
+					{/* end header section */}
+
+						{/* right side should go over here */}
             <div className="rightSide">
 							<Graph graph={this.state.graph} options={options} events={this.state.events} />
 							{type}
 						</div>
+						{/* end right side */}
           </main>
           {after}
         </div>
       </div>
-
-		// <div>
-		// 	<Header />
-
-		// 	<div className="main">
-		// 		{/* Left Panel of the Visualizer */}
-		// 		<LeftPanel />
-
-		// 		{/* Right Panel of the Visualizer */}
-		// 		<div className="rightSide">
-		// 			<Graph graph={this.state.graph} options={options} events={this.state.events} />
-		// 			{type}
-		// 		</div>
-		// 	</div>
-		// </div>
 		)
 	}
 }
@@ -509,5 +520,3 @@ App.propTypes = {
 };
 
 export default withStyles(styles, { withTheme: true })(App);
-
-// export default App;
