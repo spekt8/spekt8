@@ -52,30 +52,32 @@
 
 
 // Main Body
-.main {
-    display: flex;
-    justify-content: flex-start;
-}
 
-    .leftPanel {
-        width: 15%;
-        height: 100vh;
-        border: 2px solid blue;
-    }
 
-        .legend {
-            height: 40%;
-            border: 1px solid black;
-        }
-        .monitoring {
-            height: 25%;
-            border: 1px solid black;
-        }
-        .directions {
-            height: 35%;
-            border: 1px solid black;
-        }
+// .main {
+//     display: flex;
+//     justify-content: flex-start;
+// }
+
+//     .leftPanel {
+//         width: 15%;
+//         height: 100vh;
+//         border: 2px solid blue;
+//     }
+
+//         .legend {
+//             height: 40%;
+//             border: 1px solid black;
+//         }
+//         .monitoring {
+//             height: 25%;
+//             border: 1px solid black;
+//         }
+//         .directions {
+//             height: 35%;
+//             border: 1px solid black;
+//         }
     
     .rightSide {
-        width: 85%;
+        height: 100%;
     }
