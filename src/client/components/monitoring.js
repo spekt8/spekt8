@@ -1,5 +1,8 @@
 import React from 'react';
 
+// supplemental functions
+import fetchData from './../supplement/fetch';
+
 // material ui
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
@@ -13,6 +16,7 @@ const styles = theme => ({
     maxWidth: 400,
   },
   paper: {
+    cursor: 'pointer',
     margin: theme.spacing.unit,
     padding: theme.spacing.unit,
     textAlign: 'center'
@@ -33,10 +37,11 @@ const Monitoring = (props) => {
         direction="row"
         justify="space-evenly"
         alignItems="center"
+        color="primary"
       >
 
         {/* Refresh Button */}
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} onClick={()=>fetchData(props.nodes,props.edges,props.graph,props.that)} >
             <Grid item>
               <Refresh />
             </Grid>

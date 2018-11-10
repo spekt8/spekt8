@@ -93,6 +93,9 @@ const styles = theme => ({
   'contentShift-right': {
     marginRight: 0,
   },
+  drawerTitle: {
+    
+  }
 });
 
 export default styles;

@@ -21,6 +21,7 @@
     "font-awesome-sass-loader": "^2.0.1",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
+    "react-github-corner": "^2.3.0",
     "react-graph-vis": "^1.0.2",
     "react-modal": "^3.6.1",
     "react-redux": "^5.1.0",
