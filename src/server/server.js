@@ -9,6 +9,8 @@ kc.loadFromDefault();
 const k8sApi = kc.makeApiClient(k8s.Core_v1Api);
 const k8sApi2 = kc.makeApiClient(k8s.Extensions_v1beta1Api);
 
+const path = require('path');
+
 // use statements
 app.use(bodyParser.json());
 
@@ -19,6 +21,15 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', (req, res) => {
+  console.log('serving index.html from ', __dirname)
+  res.sendFile(path.join(__dirname, '../../dist/index.html'));
+});
+
+app.get('/main.js', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../dist/main.js'));
+});
+
+app.get('/pod', (req, res) => {
   k8sApi.listNamespacedPod('default')
     .then((re) => {
       // console.log(re.body);

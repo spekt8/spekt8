@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spekt8
+spec:
+  selector:
+    matchLabels:
+      component: spekt8
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: spekt8
+    spec:
+      containers:
+        - name: spekt8
+          image: elliotxkim/spekt8
+          ports:
+            - containerPort: 3000

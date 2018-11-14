@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata: 
+  name: loadbalancer-service
+spec: 
+  ports: 
+    - port: 8765
+      targetPort: 9376
+  selector: 
+    app: loadbalancer
+  type: LoadBalancer
+
+    

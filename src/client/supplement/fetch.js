@@ -1,20 +1,20 @@
 
 export default (nodes, edges, graph, that) => {
 	// this fetch receives the pod list
-	fetch('http://localhost:3000')
+	fetch('http://localhost:3000/api/pod')
 	.then((podData) => {
 		// console.log(data);
 		return podData.json();
 	})
 	.then((podObject) => {
 		// this fetch receives the service list
-		fetch('http://localhost:3000/service')
+		fetch('http://localhost:3000/api/service')
 			.then((serviceData) => {
 				return serviceData.json();
 			})
 			.then((serviceObject) => {
 				console.log('serviceobject',serviceObject);
-				fetch('http://localhost:3000/ingress')
+				fetch('http://localhost:3000/api/ingress')
 					.then((ingressData) => {
 						return ingressData.json();
 					})
@@ -24,15 +24,12 @@ export default (nodes, edges, graph, that) => {
 						const newGraph = Object.assign({}, graph);
 						newGraph.nodes = nodes.slice();
 						newGraph.edges = edges.slice();
-
+						
 						// place service list and pod list into separate variables
 						const serviceArray = [];
 						const podArray = [];
 						const ingressArray = [];
-						const masterNode = [];
-
-						const newMasterObject = {};
-						newMasterObject.id = 200;
+					
 
 						// this loop cycles through the service list and assigns them to their own boxes
 						// console.log('serviceobject',serviceObject);
@@ -57,7 +54,7 @@ export default (nodes, edges, graph, that) => {
 						console.log('podObject',podObject);
 						for (let i = 0; i < podObject.items.length; i+=1) { 
 							const newPodObject = {};
-							newPodObject.id = i + 10;
+							newPodObject.id = i + 1000;
 							newPodObject.kind = "Pod";
 							newPodObject.label = 'Pods'; // pod display title
 							// pending versus running pods
@@ -86,7 +83,7 @@ export default (nodes, edges, graph, that) => {
 						// this loops through the ingress object and saves to another array
 						for (let i = 0; i < ingressObject.items.length; i+=1) {
 							const newIngressObject = {};
-							newIngressObject.id = i + 100;
+							newIngressObject.id = i + 2000;
 							newIngressObject.kind = "Ingress";
 							newIngressObject.label = "Ingress";
 							newIngressObject.timeStamp = ingressObject.items[i].metadata.creationTimestamp; // ingress timestamp

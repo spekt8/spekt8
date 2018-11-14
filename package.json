@@ -6,7 +6,12 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production",
-    "server": "nodemon src/server/server.js"
+    "server": "node src/server/server.js"
+  },
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:3000"
+    }
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +24,7 @@
     "express": "^4.16.4",
     "file-loader": "^2.0.0",
     "font-awesome-sass-loader": "^2.0.1",
+    "path": "^0.12.7",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-github-corner": "^2.3.0",
