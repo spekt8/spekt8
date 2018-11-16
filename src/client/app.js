@@ -24,7 +24,6 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import GithubCorner from 'react-github-corner'
 import blue from '@material-ui/core/colors/blue';
 
-
 // const theme = createMuiTheme({
 //   typography: {
 //     useNextVariants: true,

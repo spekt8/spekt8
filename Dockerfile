@@ -7,11 +7,12 @@ WORKDIR /usr/src/app
 
 # install app dependencies
 COPY package*.json ./
+RUN npm run build
 RUN npm install 
 
 # bundle app source
 COPY . .
 
-# bind to port 8080
+# bind to port 3000
 EXPOSE 3000
 CMD ["npm", "run", "server"]

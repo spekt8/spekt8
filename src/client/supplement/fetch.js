@@ -1,20 +1,20 @@
 
 export default (nodes, edges, graph, that) => {
 	// this fetch receives the pod list
-	fetch('http://localhost:3000/api/pod')
+	fetch('http://localhost:3000/pod')
 	.then((podData) => {
 		// console.log(data);
 		return podData.json();
 	})
 	.then((podObject) => {
 		// this fetch receives the service list
-		fetch('http://localhost:3000/api/service')
+		fetch('http://localhost:3000/service')
 			.then((serviceData) => {
 				return serviceData.json();
 			})
 			.then((serviceObject) => {
 				console.log('serviceobject',serviceObject);
-				fetch('http://localhost:3000/api/ingress')
+				fetch('http://localhost:3000/ingress')
 					.then((ingressData) => {
 						return ingressData.json();
 					})
