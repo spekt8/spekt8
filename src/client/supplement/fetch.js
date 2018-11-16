@@ -1,5 +1,5 @@
 
-export default (nodes, edges, graph, that) => {
+const fetchData = (nodes, edges, graph, that) => {
 	// this fetch receives the pod list
 	fetch('http://localhost:3000/api/pod')
 	.then((podData) => {
@@ -158,3 +158,4 @@ export default (nodes, edges, graph, that) => {
 	})
 }
 
+export default fetchData;
