@@ -16,20 +16,21 @@ import Typography from '@material-ui/core/Typography';
 const LeftPanel = (props) => {
   return (
     <Drawer
-      variant="persistent"
-      anchor={props.anchor}
-      open={props.open}
-      classes={{
-        paper: props.classes.drawerPaper,
-      }}
-    >
-      
+        variant="persistent"
+        anchor={props.anchor}
+        open={props.open}
+        classes={{
+          paper: props.classes.drawerPaper,
+        }}
+      >
+      <div className='leftheader'>
       <div className={props.classes.drawerHeader}>
-        <Typography variant="h6">K8s Visualization</Typography>
+        <Typography id="paneltitle" variant="h6" >SPEKT8</Typography>
 
         <IconButton onClick={props.handleDrawerClose}>
           {props.theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
         </IconButton>
+      </div>
       </div>
 
       {/* this is where you write for the inside of the drawer */}

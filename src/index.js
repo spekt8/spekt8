@@ -4,13 +4,17 @@ import App from './client/app';
 import './client/styles/styles.scss';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
+import purple from '@material-ui/core/colors/purple';
+import white from '@material-ui/core/colors/yellow';
 
 const theme = createMuiTheme({
   typography: {
-    useNextVariants: true,
+		useNextVariants: true,
 	},
 	palette: {
 		primary: blue,
+		secondary: purple,
+		
 	}
 });
 

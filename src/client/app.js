@@ -296,6 +296,7 @@ class App extends React.Component {
               [classes[`appBarShift-${anchor}`]]: open,
             })}
           >
+
 						
 						<Toolbar disableGutters={!open}>
 							<IconButton
@@ -313,6 +314,7 @@ class App extends React.Component {
 								alignItems="center"
 								color="primary"
 							>
+
 								<Typography variant="h6" color="inherit" noWrap>
 									SPEKT8
 								</Typography>
@@ -368,9 +370,12 @@ class App extends React.Component {
 					{/* end header section */}
 
 						{/* right side should go over here */}
-            <div className="rightSide">
-							{viewStyle}
-							{type}
+						<div className="rightSide" >
+            	<div id='k8sContainer'>
+								<div id='k8simage'></div>
+								{viewStyle}
+								{type}
+							</div>
 						</div>
 						{/* end right side */}
           </main>
