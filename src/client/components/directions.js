@@ -2,9 +2,10 @@ import React from 'react';
 
 // material ui
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+
+import Grid from '@material-ui/core/Grid';
 import ArrowDropUp from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import ArrowLeft from '@material-ui/icons/ArrowLeft';
@@ -30,8 +31,8 @@ const Directions = (props) => {
   return (
     <div className="directions">
       {/* Title */}
-      <Typography variant="h6" className={classes.title}>Directions</Typography>
-
+      <Typography variant="h6" className={classes.title}>Pages</Typography>
+      
       {/* Top Row for Arrows */}
       <Grid container 
         direction="row"

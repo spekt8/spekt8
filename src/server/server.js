@@ -2,23 +2,36 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const path = require('path');
+
 // k8s javascript client require
 const k8s = require('@kubernetes/client-node');
 const kc = new k8s.KubeConfig();
 kc.loadFromDefault();
+
+/* Core_v1Api docs: https://github.com/kubernetes-client/java/blob/master/kubernetes/docs/CoreV1Api.md */
+// core_v1api -- pods, services (may include nodeport, loadbalancer)
+// optional: serviceaccount, resourcequota, replication controller if needed
 const k8sApi = kc.makeApiClient(k8s.Core_v1Api);
+
+/* Extensions_v1beta1Api docs: https://github.com/kubernetes-client/java/blob/master/kubernetes/docs/ExtensionsV1beta1Api.md */
+// extensions_v1beta1api -- ingress, deployment
+// optional: daemonset, and network policy as well as replica set if needed
 const k8sApi2 = kc.makeApiClient(k8s.Extensions_v1beta1Api);
 
-const path = require('path');
+// Other Lists:
+// AppsV1beta1Api: https://github.com/kubernetes-client/java/blob/master/kubernetes/docs/AppsV1beta1Api.md
+// - statefulset
 
 // use statements
 app.use(bodyParser.json());
-
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+
+// app.use(express.static('../../dist'));
 
 app.get('/', (req, res) => {
   console.log('serving index.html from ', __dirname)
@@ -32,12 +45,6 @@ app.get('/main.js', (req, res) => {
 app.get('/pod', (req, res) => {
   k8sApi.listNamespacedPod('default')
     .then((re) => {
-      // console.log(re.body);
-      // console.log('container information: ', re.body.items[0].spec.containers);
-      // console.log(JSON.stringify(re.body, null, 2));
-      // for (let i = 0; i < re.body.items.length; i += 1) {
-      //   console.log(re.body.items[i].spec.containers);
-      // }
       res.json(re.body);
     });
 });
@@ -58,6 +65,13 @@ app.get('/ingress', (req, res) => {
 
 app.get('/deployment', (req, res) => {
   k8sApi2.listNamespacedDeployment('default')
+    .then((re) => {
+      res.json(re.body);
+    });
+});
+
+app.get('/daemonset', (req, res) => {
+  k8sApi2.listNamespacedDaemonSet('default')
     .then((re) => {
       res.json(re.body);
     });

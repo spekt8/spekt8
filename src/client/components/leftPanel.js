@@ -16,13 +16,13 @@ import Typography from '@material-ui/core/Typography';
 const LeftPanel = (props) => {
   return (
     <Drawer
-        variant="persistent"
-        anchor={props.anchor}
-        open={props.open}
-        classes={{
-          paper: props.classes.drawerPaper,
-        }}
-      >
+      variant="persistent"
+      anchor={props.anchor}
+      open={props.open}
+      classes={{
+        paper: props.classes.drawerPaper,
+      }}
+    >
       
       <div className={props.classes.drawerHeader}>
         <Typography variant="h6">K8s Visualization</Typography>

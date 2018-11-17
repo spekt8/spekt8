@@ -4,8 +4,8 @@ const options = {
     hierarchical: {
       enabled: true,
       levelSeparation: 100,
-      nodeSpacing: 200,
-      treeSpacing: 100,
+      nodeSpacing: 150,
+      treeSpacing: 70,
       blockShifting: true,
       edgeMinimization: true,
       parentCentralization: true,
@@ -29,24 +29,68 @@ const options = {
     repulsion: {
       nodeDistance: 200,
     },
+    hierarchicalRepulsion: {
+      centralGravity: 0.0,
+      springLength: 100,
+      springConstant: 0.01,
+      nodeDistance: 80,
+      damping: 0.09
+    },
   },
   edges: {
     color: "#000000",
+    smooth: {
+      enabled: true,
+      type: "dynamic",
+      roundness: 0.8
+    },
   },
   width: '100%',
   height: '100%',
   nodes: {
-    shape: 'image',
-    // icon: {
-    // 	face: '"Font Awesome 5 Free"',
-    // 	code: '\uf466',
-    // 	size: 30,
-    // 	color: 'black'
-    // },
+    chosen: true,
+    borderWidth: 0,
+    color: {
+      border: 'black',
+      background: '#97C2FC',
+      highlight: {
+        border: '#2B7CE9',
+        background: '#D2E5FF'
+      },
+      hover: {
+        border: '#2B7CE9',
+        background: '#D2E5FF'
+      }
+    },
+    shape: 'circularImage',
+    size: 20,
     image: {
-      selected: 'https://camo.githubusercontent.com/f8ea5eab7494f955e90f60abc1d13f2ce2c2e540/68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f323037383234352f3235393331332f35653833313336322d386362612d313165322d383435332d6536626439353663383961342e706e67',
-      unselected: 'https://camo.githubusercontent.com/f8ea5eab7494f955e90f60abc1d13f2ce2c2e540/68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f323037383234352f3235393331332f35653833313336322d386362612d313165322d383435332d6536626439353663383961342e706e67'
+      selected: './baseline_image_black_48dp.png',
+      unselected: './baseline_image_black_48dp.png'
     }
+  },
+  groups: {
+    pods: {
+      shape: 'circularImage',
+      image: {
+        selected: './_ionicons_svg_logo-codepen2.svg',
+        unselected: './_ionicons_svg_logo-codepen2.svg'
+      }
+    },
+    services: {
+      shape: 'circularImage',
+      image: {
+        selected: './_ionicons_svg_md-wifi2.svg',
+        unselected: './_ionicons_svg_md-wifi2.svg'
+      }
+    },
+    ingress: {
+      shape: 'circularImage',
+      image: {
+        selected: './_ionicons_svg_md-aperture2.svg',
+        unselected: './_ionicons_svg_md-aperture2.svg'
+      }
+    },
   },
   
 };

@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata: 
+  name: nodeport-service
+spec: 
+  ports: 
+    - port: 7654
+      targetPort: 4567
+  selector: 
+    app: nodeport
+  type: NodePort
+
+    

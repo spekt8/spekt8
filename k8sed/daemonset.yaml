@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: hello-daemonset
+spec:
+  selector:
+      matchLabels:
+        name: hello-daemonset 
+  template:
+    metadata:
+      labels:
+        name: hello-daemonset 
+    spec:
+      nodeSelector: 
+        type: infra
+      containers:
+      - image: openshift/hello-openshift
+        imagePullPolicy: Always
+        name: registry
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+      serviceAccount: default
+      terminationGracePeriodSeconds: 10
