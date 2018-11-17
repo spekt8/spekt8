@@ -2,9 +2,10 @@ const fetchData = (nodes, edges, graph, that) => {
 	const p1 = fetch('http://localhost:3000/pod');
 	const p2 = fetch('http://localhost:3000/service');
 	const p3 = fetch('http://localhost:3000/ingress');
+	const p4 = fetch('http://localhost:3000/daemonset')
 
 	// Waits for all the fetch to resolve
-  Promise.all([p1, p2, p3])
+  Promise.all([p1, p2, p3, p4])
   .then((values) => {
 		Promise.all(values.map(ele => ele.json()))
 		.then((objectValues) => {
@@ -13,10 +14,12 @@ const fetchData = (nodes, edges, graph, that) => {
 			const podObject = objectValues[0];
 			const serviceObject = objectValues[1];
 			const ingressObject = objectValues[2];
+			const daemonsetObject = objectValues[3];
 
-			console.log('podobject', podObject);
-			console.log('ingressobject', ingressObject);
-			console.log('serviceobject', serviceObject);
+			// console.log('podobject', podObject);
+			// console.log('ingressobject', ingressObject);
+			// console.log('serviceobject', serviceObject);
+			// console.log('daemonsetobject', daemonsetObject);
 			
 			// this creates a copy of the state 
 			const newGraph = Object.assign({}, graph);
@@ -27,6 +30,7 @@ const fetchData = (nodes, edges, graph, that) => {
 			const serviceArray = [];
 			const podArray = [];
 			const ingressArray = [];
+			const daemonsetArray = [];
 		
 			/* SERVICES */
 			// this loop cycles through the service list and assigns them to their own boxes
@@ -44,9 +48,12 @@ const fetchData = (nodes, edges, graph, that) => {
 				// designing service object
 				newServiceObject.color = "orange";
 				newServiceObject.shape = "box";
+				// group-name
+				newServiceObject.group = 'services';
 				newGraph.nodes.push(newServiceObject);
 				serviceArray.push(newServiceObject);
 			}
+
 
 			/* PODS */
 			// this loop cycles through the pod list and assigns them to their own boxes
@@ -74,7 +81,8 @@ const fetchData = (nodes, edges, graph, that) => {
 				newPodObject.statusPhase = podObject.items[i].status.phase;
 				newPodObject.hostIP = podObject.items[i].status.hostIP;
 				newPodObject.podIP = podObject.items[i].status.podIP;
-				newPodObject.group = 'different';
+				// group-name
+				newPodObject.group = 'pods';
 				newGraph.nodes.push(newPodObject);
 				podArray.push(newPodObject);
 			}
@@ -100,11 +108,36 @@ const fetchData = (nodes, edges, graph, that) => {
 				// design the ingress node
 				newIngressObject.shape = "diamond";
 				newIngressObject.color = "teal";
-				console.log('newingressobject',newIngressObject);
+				newIngressObject.group = "ingress";
 				newGraph.nodes.push(newIngressObject);
 				ingressArray.push(newIngressObject);
 			}
-			console.log('state', newGraph.nodes);
+
+			/* DAEMONSET */
+			// for (let i = 0; i < daemonsetObject.items.length; i += 1) {
+			// 	const newDaemonSetObject = {};
+			// 	newDaemonSetObject.id = i + 3000;
+			// 	newDaemonSetObject.kind = "DaemonSet";
+			// 	newDaemonSetObject.label = "DaemonSet";
+			// 	newDaemonSetObject.timeStamp = daemonsetObject.items[i].metadata.creationTimestamp;
+			// 	newDaemonSetObject.name = daemonsetObject.items[i].metadata.name;
+			// 	newDaemonSetObject.namespace = daemonsetObject.items[i].metadata.namespace;
+			// 	// looping through containers
+			// 	let containersPath = daemonsetObject.items[i].spec.template.spec.containers; // this is containers array
+			// 	newDaemonSetObject.containers = [];
+			// 	for (let j = 0; j < containersPath.length; j += 1) {
+			// 		const containerObj = {};
+			// 		containerObj.name = containersPath[j].name;
+			// 		containerObj.image = containersPath[j].image;
+			// 		newDaemonSetObject.containers.push(containerObj);
+			// 	}
+			// 	// design the ingress node
+			// 	newDaemonSetObject.shape = "diamond";
+			// 	newDaemonSetObject.color = "teal";
+			// 	newDaemonSetObject.group = "daemonset";
+			// 	newGraph.nodes.push(newDaemonSetObject);
+			// 	daemonsetArray.push(newDaemonSetObject);
+			// }
 
 			/* SERVICE - POD CONNECTIONS */
 			// this checks whether the selector from the service object matches the labels from the pods object
@@ -128,7 +161,7 @@ const fetchData = (nodes, edges, graph, that) => {
 			
 			/* INGRESS - SERVICE CONNECTIONS */
 			// this checks whether the service is listed in an ingress object
-			console.log('ingressArray',ingressArray);
+
 			if (ingressArray[0]) {
 				for (let j = 0; j < ingressArray[0].services.length; j+=1) {
 					for (let k = 0; k < serviceArray.length; k+=1) {
@@ -144,7 +177,12 @@ const fetchData = (nodes, edges, graph, that) => {
 					}
 				}
 			}
-			console.log('newgraph',newGraph)
+
+			// console.log('podarray', podArray);
+			// console.log('ingressarray', ingressArray);
+			// console.log('servicearray', serviceArray);
+			// console.log('daemonsetarray', daemonsetArray);
+			// console.log('newGraph', newGraph)
 
 			that.setState({
 				graph: newGraph
@@ -154,3 +192,4 @@ const fetchData = (nodes, edges, graph, that) => {
 }
 
 export default fetchData;
+

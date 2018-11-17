@@ -67,45 +67,30 @@ body {
     position: center;
   
 }
+   
+.viewMenu {
+    margin-right: 10%;
+}
 
-// Main Body
+.rightSide {
+    height: 100%;
+    overflow-y: scroll;
+}
 
 
-// .main {
-//     display: flex;
-//     justify-content: flex-start;
-// }
+.tableRight {
+    margin-bottom: 10%;
+}
 
-//     .leftPanel {
-//         width: 15%;
-//         height: 100vh;
-//         border: 2px solid blue;
-//     }
+.monitoring {
+    height: 25%;
+    padding: 0 15px;
+}
 
-//         .legend {
-//             height: 40%;
-//             border: 1px solid black;
-//         }
-//         .monitoring {
-//             height: 25%;
-//             border: 1px solid black;
-//         }
-//         .directions {
-//             height: 35%;
-//             border: 1px solid black;
-//         }
-    
-    
-
-        .monitoring {
-            height: 25%;
-            padding: 0 15px;
-        }
-
-        .directions {
-            padding: 0 25px;
-            text-align: center;
-        }
+.directions {
+    padding: 0 25px;
+    text-align: center;
+}
  
 .rightSide {
     height: 100%;
@@ -127,3 +112,4 @@ body {
     background-repeat: no-repeat;
     background-position: relative;
 }
+

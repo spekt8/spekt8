@@ -4,9 +4,11 @@ import Modal from 'react-modal';
 
 // component imports
 import LeftPanel from './components/leftPanel';
+import Table from './components/table';
 
 // supplemental functions
 import fetchData from './supplement/fetch';
+import options from './supplement/graphOptions';
 
 // material ui
 import PropTypes from 'prop-types';
@@ -14,17 +16,23 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles/drawerStyles';
 import AppBar from '@material-ui/core/AppBar';
-import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 import MenuIcon from '@material-ui/icons/Menu';
-import { createMuiTheme } from '@material-ui/core/styles';
-import GithubCorner from 'react-github-corner'
-import blue from '@material-ui/core/colors/blue';
+import GithubCorner from 'react-github-corner';
 
-
+// drop-down menu
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Paper from '@material-ui/core/Paper';
+import Grow from '@material-ui/core/Grow';
+import Popper from '@material-ui/core/Popper';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
 
 // React-modal details
 const customStyles = {
@@ -38,63 +46,8 @@ const customStyles = {
 		fontFamily: 'Roboto',
   }
 };
-
 Modal.setAppElement(document.getElementById('index'))
-
-// React-graph-vis details
-var options = {
-		autoResize: true,
-    layout: {
-      hierarchical: {
-				enabled: true,
-				levelSeparation: 100,
-				nodeSpacing: 200,
-				treeSpacing: 100,
-				blockShifting: true,
-				edgeMinimization: true,
-				parentCentralization: true,
-				direction: 'UD',        // UD, DU, LR, RL
-				sortMethod: 'directed'   // hubsize, directed
-			}
-		},
-		interaction: {
-			keyboard: {
-				enabled: true,
-				speed: {
-					x:10,
-					y:10,
-					zoom:0.01,
-				},
-				bindToWindow: true,
-			},
-		},
-		physics: {
-			enabled: true,
-			repulsion: {
-				nodeDistance: 200,
-			},
-		},
-    edges: {
-			color: "#000000",
-		},
-		width: '100%',
-		height: '100%',
-		nodes: {
-			shape: 'image',
-			// icon: {
-			// 	face: '"Font Awesome 5 Free"',
-			// 	code: '\uf466',
-			// 	size: 30,
-			// 	color: 'black'
-			// },
-			image: {
-				selected: 'https://camo.githubusercontent.com/f8ea5eab7494f955e90f60abc1d13f2ce2c2e540/68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f323037383234352f3235393331332f35653833313336322d386362612d313165322d383435332d6536626439353663383961342e706e67',
-				unselected: 'https://camo.githubusercontent.com/f8ea5eab7494f955e90f60abc1d13f2ce2c2e540/68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f323037383234352f3235393331332f35653833313336322d386362612d313165322d383435332d6536626439353663383961342e706e67'
-			}
-		},
-		
-};
-
+//dsfas
 class App extends React.Component {
   constructor(props) {
 		super(props);
@@ -107,22 +60,27 @@ class App extends React.Component {
 				edges: []
 			},
 			nodeSelected: false,
-
 			// pass events object down to our render method which will invoke our selectItem method
 			events: {
 				select: this.selectItem
 			},
 			modalIsOpen: false,
-
 			// drawer states
 			open: true,
-    	anchor: 'left',
+			anchor: 'left',
+			// change view menu open
+			menuOpen: false,
+			graphTable: 'graph',
 		};
 		this.openModal = this.openModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
 		this.handleDrawerClose = this.handleDrawerClose.bind(this);
 		this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
 		this.handleChangeAnchor = this.handleChangeAnchor.bind(this);
+		this.handleToggle = this.handleToggle.bind(this);
+		this.handleClose = this.handleClose.bind(this);
+		this.handleGraphClose = this.handleGraphClose.bind(this);
+		this.handleTableClose = this.handleTableClose.bind(this);
 	}
 
 	// Modal Functions
@@ -144,7 +102,24 @@ class App extends React.Component {
     this.setState({
       anchor: event.target.value,
     });
+	};
+	
+	// View Menu Functions
+	handleToggle = () => {
+    this.setState(state => ({ menuOpen: !state.menuOpen }));
   };
+  handleClose = event => {
+    if (this.anchorEl.contains(event.target)) {
+      return;
+		}
+    this.setState({ menuOpen: false });
+	};
+	handleGraphClose = () => {
+		this.setState({ graphTable: 'graph' })
+	}
+	handleTableClose = () => {
+		this.setState({ graphTable: 'table' })
+	}
 
 	// when an item is selected, it will open a modal window and show information related to that item 
 	selectItem = (event) => {
@@ -154,7 +129,6 @@ class App extends React.Component {
 			return element.id === nodes[0];
 		})
 		console.log('foundnode',foundNode);	
-		// console.log('metadata',foundNode.metadataName)
 		if (foundNode.kind === "Pod") {  
 			this.setState(prevState => {
 				return {
@@ -204,7 +178,7 @@ class App extends React.Component {
 	render() {
 		// gets the state and props for drawer
 		const { classes, theme } = this.props;
-    const { anchor, open } = this.state;
+    const { anchor, open, menuOpen } = this.state;
 
 		// creates the drawer/left-panel component
 		const leftPanel = (
@@ -222,11 +196,20 @@ class App extends React.Component {
 				handleDrawerClose={this.handleDrawerClose}
 			/>
 		);
+		// adds functionality for showing and hiding drawer
 		let before = null;
     let after = null;
     if (anchor === 'left') {
       before = leftPanel;
     } 
+
+		// View Style - renders Graph or Table Component based on graphTable state
+		let viewStyle;
+		if (this.state.graphTable === 'graph') {
+			viewStyle = <Graph graph={this.state.graph} options={options} events={this.state.events} />
+		} else if (this.state.graphTable === 'table') {
+			viewStyle = <Table graph={this.state.graph} />
+		}
 
 		// Modal - checks the type of Object when selected
 		let type;
@@ -291,13 +274,6 @@ class App extends React.Component {
 						})}
 					</ul>
 				</div>
-				{/* <div className="serviceRight">Service Port 
-					<ul>
-				  	{this.state.services.map((obj,i) => {
-						return <li key={i}>{obj.servicePort}</li>
-						})}
-					</ul>
-				</div> */}
         <Button 
 					variant="contained" 
 					color="default" 
@@ -312,7 +288,6 @@ class App extends React.Component {
 		return (
 			<div className={classes.root}>
         <div className={classes.appFrame}>
-
 					{/* Top Header Portion */}
 					{/* Persistent Drawer */}
           <AppBar
@@ -321,24 +296,68 @@ class App extends React.Component {
               [classes[`appBarShift-${anchor}`]]: open,
             })}
           >
-							<Toolbar disableGutters={!open}>
-								<IconButton
-									color="inherit"
-									aria-label="Open drawer"
-									onClick={this.handleDrawerOpen}
-									className={classNames(classes.menuButton, open && classes.hide)}
-								>
-									<MenuIcon />
-								</IconButton>
+
+						
+						<Toolbar disableGutters={!open}>
+							<IconButton
+								color="inherit"
+								aria-label="Open drawer"
+								onClick={this.handleDrawerOpen}
+								className={classNames(classes.menuButton, open && classes.hide)}
+							>
+								<MenuIcon />
+							</IconButton>
+							<Grid
+								container
+								direction="row"
+								justify="space-between"
+								alignItems="center"
+								color="primary"
+							>
+
 								<Typography variant="h6" color="inherit" noWrap>
 									SPEKT8
 								</Typography>
-							</Toolbar>
-							{/* Github banner on the top right */}
-							<div className={classes.githubWrapper}>
-								<GithubCorner href="https://github.com/spekt8/spekt8" size="65" bannerColor="white" octoColor="#2196f3"/>
-							</div>
-						{/* </Grid> */}
+
+								{/* View Menu */}
+								<div className="viewMenu">
+									<Button
+										buttonRef={node => {
+											this.anchorEl = node;
+										}}
+										aria-owns={menuOpen ? 'menu-list-grow' : undefined}
+										aria-haspopup="true"
+										onClick={this.handleToggle}
+										variant="contained"
+									>
+										<KeyboardArrowDown />View
+									</Button>
+									<Popper open={menuOpen} anchorEl={this.anchorEl} transition disablePortal>
+										{({ TransitionProps, placement }) => (
+											<Grow
+												{...TransitionProps}
+												id="menu-list-grow"
+												style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+											>
+												<Paper>
+													<ClickAwayListener onClickAway={this.handleClose}>
+														<MenuList>
+															<MenuItem onClick={this.handleGraphClose}>Graph</MenuItem>
+															<MenuItem onClick={this.handleTableClose}>Table</MenuItem>
+														</MenuList>
+													</ClickAwayListener>
+												</Paper>
+											</Grow>
+										)}
+									</Popper>
+								</div>
+							</Grid>
+							
+						</Toolbar>
+						{/* Github banner on the top right */}
+						<div className={classes.githubWrapper}>
+							<GithubCorner href="https://github.com/spekt8/spekt8" size="65" bannerColor="white" octoColor="#2196f3"/>
+						</div>
           </AppBar>
 					{before}
           <main
@@ -354,7 +373,7 @@ class App extends React.Component {
 						<div className="rightSide" >
             	<div id='k8sContainer'>
 								<div id='k8simage'></div>
-								<Graph graph={this.state.graph} options={options} events={this.state.events} />
+								{viewStyle}
 								{type}
 							</div>
 						</div>

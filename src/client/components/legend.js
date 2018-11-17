@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import Switch from '@material-ui/core/Switch';
-import WifiIcon from '@material-ui/icons/Wifi';
-import BluetoothIcon from '@material-ui/icons/Bluetooth';
+
+// image imports
+import PodIcon from '../../../dist/_ionicons_svg_logo-codepen.svg';
+import ServiceIcon from '../../../dist/_ionicons_svg_md-wifi.svg';
+import IngressIcon from '../../../dist/_ionicons_svg_md-aperture.svg';
 
 const styles = theme => ({
   root: {
@@ -60,9 +62,7 @@ class Legend extends React.Component {
 
           {/* 1st Item */}
           <ListItem>
-            <ListItemIcon>
-              <WifiIcon />
-            </ListItemIcon>
+            <img src={PodIcon} style={{ "height": "40px", "width": "40px"}} />
             <ListItemText primary="Pod" />
             <ListItemSecondaryAction>
               <Switch
@@ -74,9 +74,7 @@ class Legend extends React.Component {
 
           {/* 2nd Item */}
           <ListItem>
-            <ListItemIcon>
-              <BluetoothIcon />
-            </ListItemIcon>
+            <img src={ServiceIcon} style={{ "height": "40px", "width": "40px"}} />
             <ListItemText primary="Service" />
             <ListItemSecondaryAction>
               <Switch
@@ -88,9 +86,7 @@ class Legend extends React.Component {
 
           {/* 3rd Item */}
           <ListItem>
-            <ListItemIcon>
-              <BluetoothIcon />
-            </ListItemIcon>
+            <img src={IngressIcon} style={{ "height": "40px", "width": "40px"}} />
             <ListItemText primary="Ingress" />
             <ListItemSecondaryAction>
               <Switch
