@@ -56,7 +56,7 @@ class Legend extends React.Component {
       <div className={classes.root}>
         <List>
           {/* Title */}
-          <Typography variant="h6" className={classes.typo}>Legend</Typography>
+          <Typography id="legendtitle" variant="h6" className={classes.typo}>Legend</Typography>
 
           {/* 1st Item */}
           <ListItem>

@@ -24,14 +24,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import GithubCorner from 'react-github-corner'
 import blue from '@material-ui/core/colors/blue';
 
-// const theme = createMuiTheme({
-//   typography: {
-//     useNextVariants: true,
-// 	},
-// 	palette: {
-// 		primary: blue,
-// 	}
-// });
+
 
 // React-modal details
 const customStyles = {
@@ -328,12 +321,6 @@ class App extends React.Component {
               [classes[`appBarShift-${anchor}`]]: open,
             })}
           >
-						{/* <Grid
-							container
-							direction="row"
-							justify="space-between"
-							alignItems="center"
-						> */}
 							<Toolbar disableGutters={!open}>
 								<IconButton
 									color="inherit"
@@ -364,9 +351,12 @@ class App extends React.Component {
 					{/* end header section */}
 
 						{/* right side should go over here */}
-            <div className="rightSide">
-							<Graph graph={this.state.graph} options={options} events={this.state.events} />
-							{type}
+						<div className="rightSide" >
+            	<div id='k8sContainer'>
+								<div id='k8simage'></div>
+								<Graph graph={this.state.graph} options={options} events={this.state.events} />
+								{type}
+							</div>
 						</div>
 						{/* end right side */}
           </main>

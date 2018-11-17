@@ -56,6 +56,17 @@ body {
     border-bottom: 1px solid black;
 }
 
+// -------------------------------------------
+// DRAWER ITEMS
+.leftheader {
+    background-color: rgb(2, 3, 59);
+}
+
+#paneltitle {
+    color: white;
+    position: center;
+  
+}
 
 // Main Body
 
@@ -84,9 +95,7 @@ body {
 //             border: 1px solid black;
 //         }
     
-    .rightSide {
-        height: 100%;
-    }
+    
 
         .monitoring {
             height: 25%;
@@ -97,3 +106,24 @@ body {
             padding: 0 25px;
             text-align: center;
         }
+ 
+.rightSide {
+    height: 100%;
+ 
+}
+
+#k8sContainer {
+    position: relative;
+    height: 872px;
+}
+#k8sContainer #k8simage {
+    width: 1033px;
+    height: 872px; /* or whatever, equal to the image you want 'watermarked' */
+    // width: 400px; /* as above */
+    background-image: url(../../../images/k8slogo.png);
+    opacity: 0.1;
+    position: absolute;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position: relative;
+}
