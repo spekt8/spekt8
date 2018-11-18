@@ -26,7 +26,6 @@ const LeftPanel = (props) => {
       
       <div className={props.classes.drawerHeader}>
         <Typography variant="h6">K8s Visualization</Typography>
-
         <IconButton onClick={props.handleDrawerClose}>
           {props.theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
         </IconButton>
@@ -49,7 +48,7 @@ const LeftPanel = (props) => {
 
       {/* Directions */}
       <Divider />
-      <Directions />
+      {/* <Directions /> */}
 
     </Drawer>
   )

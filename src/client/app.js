@@ -47,7 +47,7 @@ const customStyles = {
   }
 };
 Modal.setAppElement(document.getElementById('index'))
-//dsfas
+
 class App extends React.Component {
   constructor(props) {
 		super(props);
@@ -115,10 +115,10 @@ class App extends React.Component {
     this.setState({ menuOpen: false });
 	};
 	handleGraphClose = () => {
-		this.setState({ graphTable: 'graph' })
+		this.setState({ graphTable: 'graph', menuOpen: false })
 	}
 	handleTableClose = () => {
-		this.setState({ graphTable: 'table' })
+		this.setState({ graphTable: 'table', menuOpen: false })
 	}
 
 	// when an item is selected, it will open a modal window and show information related to that item 
@@ -176,6 +176,7 @@ class App extends React.Component {
 	}
 
 	render() {
+		console.log(this.state.graph.nodes);
 		// gets the state and props for drawer
 		const { classes, theme } = this.props;
     const { anchor, open, menuOpen } = this.state;

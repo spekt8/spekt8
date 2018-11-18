@@ -62,14 +62,15 @@ const options = {
         background: '#D2E5FF'
       }
     },
-    shape: 'circularImage',
-    size: 20,
-    image: {
-      selected: './baseline_image_black_48dp.png',
-      unselected: './baseline_image_black_48dp.png'
-    }
   },
   groups: {
+    master: {
+      shape: 'circularImage',
+      image: {
+        selected: './_ionicons_svg_md-crop2.svg',
+        unselected: './_ionicons_svg_md-crop2.svg',
+      }
+    },
     pods: {
       shape: 'circularImage',
       image: {

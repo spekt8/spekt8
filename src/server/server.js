@@ -77,6 +77,13 @@ app.get('/daemonset', (req, res) => {
     });
 });
 
+// app.get('/components', (req, res) => {
+//   k8sApi3.conditions('default')
+//     .then((re) => {
+//       res.json(re.body);
+//     });
+// });
+
 // server listening
 app.listen(3000, (err) => {
   if (err) console.log(err);
