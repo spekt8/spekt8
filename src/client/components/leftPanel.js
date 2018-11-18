@@ -16,29 +16,31 @@ import Typography from '@material-ui/core/Typography';
 const LeftPanel = (props) => {
   return (
     <Drawer
-      variant="persistent"
-      anchor={props.anchor}
-      open={props.open}
-      classes={{
-        paper: props.classes.drawerPaper,
-      }}
-    >
-      
+        variant="persistent"
+        anchor={props.anchor}
+        open={props.open}
+        classes={{
+          paper: props.classes.drawerPaper,
+        }}
+      >
+      <div className='leftheader'>
       <div className={props.classes.drawerHeader}>
-        <Typography variant="h6">K8s Visualization</Typography>
-        <IconButton onClick={props.handleDrawerClose}>
+        <div id="leftheadertitle" >SPEKT8</div>
+        <IconButton id="handledrawerbutton" onClick={props.handleDrawerClose}>
           {props.theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
         </IconButton>
+      </div>
       </div>
 
       {/* this is where you write for the inside of the drawer */}
       {/* Legend */}
-      <Divider />
+      <Divider style={{'background-color':'#9CABB8'}}/>
+      <Divider style={{'background-color':'#9CABB8'}}/>
       <Legend />
 
       {/* Monitoring */}
-      <Divider />
-      <Divider />
+      <Divider style={{'background-color':'#9CABB8'}}/>
+      <Divider style={{'background-color':'#9CABB8'}}/>
       <Monitoring 
         nodes={props.nodes}
         edges={props.edges}
@@ -47,8 +49,9 @@ const LeftPanel = (props) => {
       />
 
       {/* Directions */}
-      <Divider />
-      {/* <Directions /> */}
+      <Divider style={{'background-color':'#9CABB8'}}/>
+      <Divider style={{'background-color':'#9CABB8'}}/>
+      <Directions />
 
     </Drawer>
   )

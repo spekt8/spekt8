@@ -34,6 +34,9 @@ import MenuList from '@material-ui/core/MenuList';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
 
+// import images
+import img from './images/k8slogo.png';
+
 // React-modal details
 const customStyles = {
   content : {
@@ -291,7 +294,7 @@ class App extends React.Component {
         <div className={classes.appFrame}>
 					{/* Top Header Portion */}
 					{/* Persistent Drawer */}
-          <AppBar
+          <AppBar id="appbar"
             className={classNames(classes.appBar, {
               [classes.appBarShift]: open,
               [classes[`appBarShift-${anchor}`]]: open,
@@ -314,9 +317,7 @@ class App extends React.Component {
 								alignItems="center"
 								color="primary"
 							>
-								<Typography variant="h6" color="inherit" noWrap>
-									SPEKT8
-								</Typography>
+							{/* can add any titles here */}
 
 								{/* View Menu */}
 								<div className="viewMenu">
@@ -369,9 +370,12 @@ class App extends React.Component {
 					{/* end header section */}
 
 						{/* right side should go over here */}
-            <div className="rightSide">
-							{viewStyle}
-							{type}
+						<div className="rightSide" >
+            	<div id='k8sContainer'>
+								<div id='k8simage'><img src={img}/></div>
+								{viewStyle}
+								{type}
+							</div>
 						</div>
 						{/* end right side */}
           </main>

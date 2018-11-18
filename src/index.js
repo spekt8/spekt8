@@ -9,11 +9,11 @@ import store from './client/reducers/store';
 
 const theme = createMuiTheme({
   typography: {
-    useNextVariants: true,
+		useNextVariants: true,
 	},
 	palette: {
 		primary: blue,
-	}
+	},
 });
 
 ReactDOM.render(

@@ -25,17 +25,22 @@ module.exports = {
                     },
                 ]
             },
+            // { 
+            //     test: /\.(png|jpg)$/,
+            //     use: {
+            //         loader: "url-loader?limit=8192" 
+            //     }
+            // },
             { 
-                test: /\.(png|jpg)$/,
-                use: {
-                    loader: "url-loader?limit=8192" 
-                }
-            },
-            { 
-                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                use: {
-                    loader: "file-loader" 
-                }
+                test: /\.(jpg|png|ttf|eot|svg)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[path][name]-[hash:8].[ext]'
+                        },
+                    },
+                ]
             },
         ]
     },

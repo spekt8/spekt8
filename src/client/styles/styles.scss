@@ -56,6 +56,62 @@ body {
     border-bottom: 1px solid black;
 }
 
+// ---------------------------------------------------
+// DRAWER ITEMS
+
+// header
+.leftheader {
+    background-color: #08182E
+}
+#leftheadertitle {
+    color: #F8F8F8;
+    text-align: left;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#handledrawerbutton {
+    color: #F8F8F8;
+}
+
+// legend 
+#legendpanel {
+    background-color: #08182E;
+}
+#legendtitle {
+    color: #b4c5d3;
+}
+#podlabel {
+    color: #F8F8F8;
+}
+.divider {
+    color:black;
+}
+
+// monitoring 
+.monitoring {
+    background-color: #08182E;
+}
+#refreshbutton {
+    background-color: #b4c5d3;
+}
+#refreshbutton:hover {
+    background-color: #6699CC;
+}
+#monitorbutton {
+    background-color: #b4c5d3;
+}
+#monitorbutton:hover {
+    background-color: #6699CC;
+}
+
+// directions
+.directions {
+    background-color: #08182E;
+}
+#pageslabel {
+    color: #b4c5d3;
+}
+
 .viewMenu {
     margin-right: 10%;
 }
@@ -65,16 +121,40 @@ body {
     overflow-y: scroll;
 }
 
+
 .tableRight {
     margin-bottom: 10%;
 }
 
-    .monitoring {
-        height: 25%;
-        padding: 0 15px;
-    }
+.monitoring {
+    height: 25%;
+    padding: 0 15px;
+}
 
-    .directions {
-        padding: 0 25px;
-        text-align: center;
-    }
+.directions {
+    padding: 0 25px;
+    text-align: center;
+}
+ 
+// -----------------------------------------------------
+// MAIN VISUALIZATION ITEMS
+.rightSide {
+    height: 100%;
+}
+
+#k8sContainer {
+    position: relative;
+    height: 100%;
+}
+#k8sContainer #k8simage {
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    position: fixed;
+    top: 30%;
+    left: 40%;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+}
+

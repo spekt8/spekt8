@@ -1,4 +1,3 @@
-
 const fetchData = (nodes, edges, graph, that) => {
 	const p1 = fetch('http://localhost:3000/pod');
 	const p2 = fetch('http://localhost:3000/service');
@@ -90,7 +89,6 @@ const fetchData = (nodes, edges, graph, that) => {
 				podArray.push(newPodObject);
 			}
 
-
 			/* INGRESS */
 			// this loops through the ingress object and saves to another array
 			for (let i = 0; i < ingressObject.items.length; i+=1) {
@@ -116,7 +114,6 @@ const fetchData = (nodes, edges, graph, that) => {
 				newGraph.nodes.push(newIngressObject);
 				ingressArray.push(newIngressObject);
 			}
-
 
 			/* DAEMONSET */
 			// for (let i = 0; i < daemonsetObject.items.length; i += 1) {
@@ -166,6 +163,7 @@ const fetchData = (nodes, edges, graph, that) => {
 			
 			/* INGRESS - SERVICE CONNECTIONS */
 			// this checks whether the service is listed in an ingress object
+
 			if (ingressArray[0]) {
 				for (let j = 0; j < ingressArray[0].services.length; j+=1) {
 					for (let k = 0; k < serviceArray.length; k+=1) {
@@ -209,3 +207,4 @@ const fetchData = (nodes, edges, graph, that) => {
 }
 
 export default fetchData;
+

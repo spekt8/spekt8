@@ -35,13 +35,9 @@ const styles = theme => ({
     padding: theme.spacing.unit,
     textAlign: 'center'
   },
-  colorSwitchBase: {
-    color: purple[300],
-  },
   colorBar: {
-    backgroundColor: purple[1000]
-  },
-  
+    backgroundColor: 'white',
+  }
 });
 
 class Legend extends React.Component {
@@ -53,22 +49,26 @@ class Legend extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div className={classes.root}>
+      <div id="legendpanel" className={classes.root}>
         <List>
           {/* Title */}
-          <Typography variant="h6" className={classes.typo}>Legend</Typography>
+          <Typography id="legendtitle" variant="h6" className={classes.typo}>Legend</Typography>
 
           {/* 1st Item */}
           <ListItem>
             <img src={PodIcon} style={{ "height": "40px", "width": "40px"}} />
+            {/* <ListItemText primary="Pod" /> */}
             <ListItemText 
               disableTypography
-              primary={<Typography variant="body1" style={{ color: '#000000' }}>Pods</Typography>}
+              primary={<Typography variant="body1" style={{color: '#b4c5d3' }}>&nbsp;Pod</Typography>}
             />
             <ListItemSecondaryAction>
               <Switch
-                onChange={() => this.props.handleLegendToggle('pod')}
-                checked={this.props.checked.indexOf('pod') !== -1}
+                classes={{
+                  bar: classes.colorBar
+                }}
+                onChange={this.handleToggle('pod')}
+                checked={this.state.checked.indexOf('pod') !== -1}
               />
             </ListItemSecondaryAction>
           </ListItem>
@@ -76,11 +76,17 @@ class Legend extends React.Component {
           {/* 2nd Item */}
           <ListItem>
             <img src={ServiceIcon} style={{ "height": "40px", "width": "40px"}} />
-            <ListItemText primary="Service" />
+            <ListItemText 
+              disableTypography
+              primary={<Typography variant="body1" style={{color: '#b4c5d3' }}>&nbsp;Service</Typography>}
+            />
             <ListItemSecondaryAction>
               <Switch
-                onChange={() => this.props.handleLegendToggle('service')}
-                checked={this.props.checked.indexOf('service') !== -1}
+                classes={{
+                  bar: classes.colorBar
+                }}
+                onChange={this.handleToggle('service')}
+                checked={this.state.checked.indexOf('service') !== -1}
               />
             </ListItemSecondaryAction>
           </ListItem>
@@ -88,18 +94,19 @@ class Legend extends React.Component {
           {/* 3rd Item */}
           <ListItem>
             <img src={IngressIcon} style={{ "height": "40px", "width": "40px"}} />
-            <ListItemText primary="Ingress" />
-            <ListItemSecondaryAction>
-              <Switch
-                onChange={() => this.props.handleLegendToggle('ingress')}
-                checked={this.props.checked.indexOf('ingress') !== -1}
+            <ListItemText 
+              disableTypography
+              primary={<Typography variant="body1" style={{color: '#b4c5d3' }}>&nbsp;Ingress</Typography>}
+            />
+            <ListItemSecondaryAction >
+              <Switch 
                 classes={{
-                  switchBase: classes.colorSwitchBase,
-                  checked: classes.colorChecked,
-                  bar: classes.colorBar,
+                  bar: classes.colorBar
                 }}
+                onChange={this.handleToggle('ingress')}
+                checked={this.state.checked.indexOf('ingress') !== -1}
               />
-            </ListItemSecondaryAction>
+            </ListItemSecondaryAction >
           </ListItem>
 
         </List>
