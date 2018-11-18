@@ -25,12 +25,12 @@ module.exports = {
                     },
                 ]
             },
-            { 
-                test: /\.(png|jpg)$/,
-                use: {
-                    loader: "url-loader?limit=8192" 
-                }
-            },
+            // { 
+            //     test: /\.(png|jpg)$/,
+            //     use: {
+            //         loader: "url-loader?limit=8192" 
+            //     }
+            // },
             { 
                 test: /\.(jpg|png|ttf|eot|svg)$/,
                 use: [

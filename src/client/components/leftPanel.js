@@ -25,9 +25,8 @@ const LeftPanel = (props) => {
       >
       <div className='leftheader'>
       <div className={props.classes.drawerHeader}>
-        <Typography id="paneltitle" variant="h6" >SPEKT8</Typography>
-
-        <IconButton onClick={props.handleDrawerClose}>
+        <div id="leftheadertitle" >SPEKT8</div>
+        <IconButton id="handledrawerbutton" onClick={props.handleDrawerClose}>
           {props.theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
         </IconButton>
       </div>
@@ -35,12 +34,13 @@ const LeftPanel = (props) => {
 
       {/* this is where you write for the inside of the drawer */}
       {/* Legend */}
-      <Divider />
+      <Divider style={{'background-color':'#9CABB8'}}/>
+      <Divider style={{'background-color':'#9CABB8'}}/>
       <Legend />
 
       {/* Monitoring */}
-      <Divider />
-      <Divider />
+      <Divider style={{'background-color':'#9CABB8'}}/>
+      <Divider style={{'background-color':'#9CABB8'}}/>
       <Monitoring 
         nodes={props.nodes}
         edges={props.edges}
@@ -49,7 +49,8 @@ const LeftPanel = (props) => {
       />
 
       {/* Directions */}
-      <Divider />
+      <Divider style={{'background-color':'#9CABB8'}}/>
+      <Divider style={{'background-color':'#9CABB8'}}/>
       <Directions />
 
     </Drawer>

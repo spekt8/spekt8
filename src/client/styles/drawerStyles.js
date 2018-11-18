@@ -59,6 +59,7 @@ const styles = theme => ({
   drawerPaper: {
     position: 'relative',
     width: drawerWidth,
+    backgroundColor: '#08182E',
   },
   drawerHeader: {
     display: 'flex',

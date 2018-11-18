@@ -29,7 +29,7 @@ const Monitoring = (props) => {
   return (
     <div className="monitoring">
       {/* Title */}
-      <Typography variant="h6" className={classes.paper}>Monitoring</Typography>
+      <Typography variant="h6" style={{color: '#9CABB8' }} className={classes.paper}>Monitoring</Typography>
 
       {/* Sets up Horizontal Row */}
       <Grid
@@ -41,7 +41,7 @@ const Monitoring = (props) => {
       >
 
         {/* Refresh Button */}
-        <Paper className={classes.paper} onClick={()=>fetchData(props.nodes,props.edges,props.graph,props.that)} >
+        <Paper id="refreshbutton" className={classes.paper} onClick={()=>fetchData(props.nodes,props.edges,props.graph,props.that)} >
             <Grid item>
               <Refresh />
             </Grid>
@@ -51,7 +51,7 @@ const Monitoring = (props) => {
         </Paper>
 
         {/* Live Monitoring */}
-        <Paper className={classes.paper}>
+        <Paper id="monitorbutton" className={classes.paper}>
             <Grid item>
               <RemoveRedEye />
             </Grid>
