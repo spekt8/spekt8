@@ -67,8 +67,8 @@ class Legend extends React.Component {
                 classes={{
                   bar: classes.colorBar
                 }}
-                onChange={this.handleToggle('pod')}
-                checked={this.state.checked.indexOf('pod') !== -1}
+                onChange={() => this.props.handleLegendToggle('pod')}
+                checked={this.props.checked.indexOf('pod') !== -1}
               />
             </ListItemSecondaryAction>
           </ListItem>
@@ -85,8 +85,8 @@ class Legend extends React.Component {
                 classes={{
                   bar: classes.colorBar
                 }}
-                onChange={this.handleToggle('service')}
-                checked={this.state.checked.indexOf('service') !== -1}
+                onChange={() => this.props.handleLegendToggle('service')}
+                checked={this.props.checked.indexOf('service') !== -1}
               />
             </ListItemSecondaryAction>
           </ListItem>
@@ -103,8 +103,8 @@ class Legend extends React.Component {
                 classes={{
                   bar: classes.colorBar
                 }}
-                onChange={this.handleToggle('ingress')}
-                checked={this.state.checked.indexOf('ingress') !== -1}
+                onChange={() => this.props.handleLegendToggle('ingress')}
+                checked={this.props.checked.indexOf('ingress') !== -1}
               />
             </ListItemSecondaryAction >
           </ListItem>

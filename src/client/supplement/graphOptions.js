@@ -5,7 +5,7 @@ const options = {
       enabled: true,
       levelSeparation: 100,
       nodeSpacing: 150,
-      treeSpacing: 70,
+      treeSpacing: 40,
       blockShifting: true,
       edgeMinimization: true,
       parentCentralization: true,

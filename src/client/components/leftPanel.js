@@ -34,13 +34,13 @@ const LeftPanel = (props) => {
 
       {/* this is where you write for the inside of the drawer */}
       {/* Legend */}
-      <Divider style={{'background-color':'#9CABB8'}}/>
-      <Divider style={{'background-color':'#9CABB8'}}/>
+      <Divider style={{'backgroundColor':'#9CABB8'}}/>
+      <Divider style={{'backgroundColor':'#9CABB8'}}/>
       <Legend />
 
       {/* Monitoring */}
-      <Divider style={{'background-color':'#9CABB8'}}/>
-      <Divider style={{'background-color':'#9CABB8'}}/>
+      <Divider style={{'backgroundColor':'#9CABB8'}}/>
+      <Divider style={{'backgroundColor':'#9CABB8'}}/>
       <Monitoring 
         nodes={props.nodes}
         edges={props.edges}
@@ -49,8 +49,8 @@ const LeftPanel = (props) => {
       />
 
       {/* Directions */}
-      <Divider style={{'background-color':'#9CABB8'}}/>
-      <Divider style={{'background-color':'#9CABB8'}}/>
+      <Divider style={{'backgroundColor':'#9CABB8'}}/>
+      <Divider style={{'backgroundColor':'#9CABB8'}}/>
       <Directions />
 
     </Drawer>
