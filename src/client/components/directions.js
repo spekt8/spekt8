@@ -31,7 +31,7 @@ const Directions = (props) => {
   return (
     <div className="directions">
       {/* Title */}
-      <Typography variant="h6" className={classes.title}>Pages</Typography>
+      <Typography id="pageslabel" variant="h6" className={classes.title}>Pages</Typography>
       
       {/* Top Row for Arrows */}
       <Grid container 
@@ -41,13 +41,13 @@ const Directions = (props) => {
         spacing={24}
       >
         <Grid item xs>
-          <ZoomOut />
+          <ZoomOut style={{color: '#9CABB8' }} />
         </Grid>
         <Grid item xs>
-          <ArrowDropUp className={classes.arrowSize}/>
+          <ArrowDropUp style={{color: '#9CABB8' }} className={classes.arrowSize}/>
         </Grid>
         <Grid item xs>
-          <ZoomIn />
+          <ZoomIn style={{color: '#9CABB8' }} />
         </Grid>
       </Grid>
 
@@ -59,13 +59,13 @@ const Directions = (props) => {
         spacing={24}
       >
         <Grid item xs>
-          <ArrowLeft className={classes.arrowSize}/>
+          <ArrowLeft style={{color: '#9CABB8' }} className={classes.arrowSize}/>
         </Grid>
         <Grid item xs>
-          <ArrowDropDown className={classes.arrowSize}/>
+          <ArrowDropDown style={{color: '#9CABB8' }} className={classes.arrowSize}/>
         </Grid>
         <Grid item xs>
-          <ArrowRight className={classes.arrowSize}/>
+          <ArrowRight style={{color: '#9CABB8' }} className={classes.arrowSize}/>
         </Grid>
       </Grid>
       
