@@ -25,7 +25,7 @@ const LeftPanel = (props) => {
       >
       <div className='leftheader'>
       <div className={props.classes.drawerHeader}>
-        <div id="leftheadertitle" >SPEKT8</div>
+        <div id="leftheadertitle" >S P E K T 8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
         <IconButton id="handledrawerbutton" onClick={props.handleDrawerClose}>
           {props.theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
         </IconButton>

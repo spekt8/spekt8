@@ -37,6 +37,8 @@ const styles = theme => ({
     marginLeft: 0,
     marginRight: 0,
     width: '100%',
+    color: 'white',
+    backgroundColor:'#2196f3',
   },
   github: {
     width: 40,
@@ -94,9 +96,6 @@ const styles = theme => ({
   'contentShift-right': {
     marginRight: 0,
   },
-  drawerTitle: {
-    
-  }
 });
 
 export default styles;

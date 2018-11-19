@@ -4,6 +4,8 @@ import App from './client/app';
 import './client/styles/styles.scss';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
+import yellow from '@material-ui/core/colors/yellow';
+
 import { Provider } from 'react-redux'; 
 import store from './client/reducers/store';
 
@@ -13,6 +15,9 @@ const theme = createMuiTheme({
 	},
 	palette: {
 		primary: blue,
+		secondary: {
+			main: '#ffd54f',
+		}
 	},
 });
 

@@ -23,6 +23,7 @@ const k8sApi2 = kc.makeApiClient(k8s.Extensions_v1beta1Api);
 // AppsV1beta1Api: https://github.com/kubernetes-client/java/blob/master/kubernetes/docs/AppsV1beta1Api.md
 // - statefulset;
 
+
 // use statements
 app.use(bodyParser.json());
 
