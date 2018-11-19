@@ -8,10 +8,20 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import Switch from '@material-ui/core/Switch';
 
+import blue from '@material-ui/core/colors/blue';
+import purple from '@material-ui/core/colors/purple';
+
+
 // image imports
 import PodIcon from '../../../dist/_ionicons_svg_logo-codepen.svg';
 import ServiceIcon from '../../../dist/_ionicons_svg_md-wifi.svg';
 import IngressIcon from '../../../dist/_ionicons_svg_md-aperture.svg';
+
+// redux
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'; 
+import { handleLegendToggle } from '../actions/graphing'; 
+
 
 const styles = theme => ({
   root: {
@@ -33,26 +43,7 @@ const styles = theme => ({
 class Legend extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      checked: ['pod'],
-    }
   }
-
-  handleToggle = value => () => {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    this.setState({
-      checked: newChecked,
-    });
-  };
 
   render() {
     const { classes } = this.props;
@@ -76,8 +67,8 @@ class Legend extends React.Component {
                 classes={{
                   bar: classes.colorBar
                 }}
-                onChange={this.handleToggle('pod')}
-                checked={this.state.checked.indexOf('pod') !== -1}
+                onChange={() => this.props.handleLegendToggle('pod')}
+                checked={this.props.checked.indexOf('pod') !== -1}
               />
             </ListItemSecondaryAction>
           </ListItem>
@@ -94,8 +85,8 @@ class Legend extends React.Component {
                 classes={{
                   bar: classes.colorBar
                 }}
-                onChange={this.handleToggle('service')}
-                checked={this.state.checked.indexOf('service') !== -1}
+                onChange={() => this.props.handleLegendToggle('service')}
+                checked={this.props.checked.indexOf('service') !== -1}
               />
             </ListItemSecondaryAction>
           </ListItem>
@@ -112,8 +103,8 @@ class Legend extends React.Component {
                 classes={{
                   bar: classes.colorBar,
                 }}
-                onChange={this.handleToggle('ingress')}
-                checked={this.state.checked.indexOf('ingress') !== -1}
+                onChange={() => this.props.handleLegendToggle('ingress')}
+                checked={this.props.checked.indexOf('ingress') !== -1}
               />
             </ListItemSecondaryAction >
           </ListItem>
@@ -127,5 +118,19 @@ class Legend extends React.Component {
 Legend.propTypes = {
   classes: PropTypes.object.isRequired,
 };
+
+const mapStateToProps = (state) => {
+  return {
+    checked: state.graphing.checked
+  }
+}
+
+const mapDispatchToProps = (dispatch) => { 
+  return bindActionCreators({  
+    handleLegendToggle
+  }, dispatch) 
+} 
+
+Legend = connect(mapStateToProps, mapDispatchToProps)(Legend);
 
 export default withStyles(styles)(Legend);

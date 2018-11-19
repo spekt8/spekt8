@@ -32,12 +32,14 @@ const fetchData = (nodes, edges, graph, that) => {
 			const ingressArray = [];
 			const daemonsetArray = [];
 		
+			
+
 			/* SERVICES */
 			// this loop cycles through the service list and assigns them to their own boxes
 			for (let i = 0; i < serviceObject.items.length; i+=1) {
 				const newServiceObject = {};
 				// saving service object information
-				newServiceObject.id = i;
+				newServiceObject.id = i + 1000;
 				newServiceObject.kind = "Service";
 				newServiceObject.label = serviceObject.items[i].metadata.name; // service display title
 				newServiceObject.timeStamp = serviceObject.items[i].metadata.creationTimestamp;  // service timestamp
@@ -59,7 +61,7 @@ const fetchData = (nodes, edges, graph, that) => {
 			// this loop cycles through the pod list and assigns them to their own boxes
 			for (let i = 0; i < podObject.items.length; i+=1) { 
 				const newPodObject = {};
-				newPodObject.id = i + 1000;
+				newPodObject.id = i + 2000;
 				newPodObject.kind = "Pod";
 				newPodObject.label = 'Pods'; // pod display title
 				// pending versus running pods
@@ -91,7 +93,7 @@ const fetchData = (nodes, edges, graph, that) => {
 			// this loops through the ingress object and saves to another array
 			for (let i = 0; i < ingressObject.items.length; i+=1) {
 				const newIngressObject = {};
-				newIngressObject.id = i + 2000;
+				newIngressObject.id = i + 3000;
 				newIngressObject.kind = "Ingress";
 				newIngressObject.label = "Ingress";
 				newIngressObject.timeStamp = ingressObject.items[i].metadata.creationTimestamp; // ingress timestamp
@@ -116,7 +118,7 @@ const fetchData = (nodes, edges, graph, that) => {
 			/* DAEMONSET */
 			// for (let i = 0; i < daemonsetObject.items.length; i += 1) {
 			// 	const newDaemonSetObject = {};
-			// 	newDaemonSetObject.id = i + 3000;
+			// 	newDaemonSetObject.id = i + 4000;
 			// 	newDaemonSetObject.kind = "DaemonSet";
 			// 	newDaemonSetObject.label = "DaemonSet";
 			// 	newDaemonSetObject.timeStamp = daemonsetObject.items[i].metadata.creationTimestamp;
@@ -183,6 +185,19 @@ const fetchData = (nodes, edges, graph, that) => {
 			// console.log('servicearray', serviceArray);
 			// console.log('daemonsetarray', daemonsetArray);
 			// console.log('newGraph', newGraph)
+
+			newGraph.nodes.push(
+				{ id: 1, label: 'kube-controller-manger', group: 'master' },
+				{ id: 2, label: 'etcd', group: 'master' },
+				{ id: 3, label: 'kube-scheduler', group: 'master' },
+				{ id: 4, label: 'kube-apiserver', group: 'master' }
+			)
+
+			newGraph.edges.push(
+				{ from: 1, to: 4 },
+				{ from: 2, to: 4 },
+				{ from: 3, to: 4 },
+			)
 
 			that.setState({
 				graph: newGraph

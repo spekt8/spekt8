@@ -5,7 +5,7 @@ const options = {
       enabled: true,
       levelSeparation: 100,
       nodeSpacing: 150,
-      treeSpacing: 70,
+      treeSpacing: 40,
       blockShifting: true,
       edgeMinimization: true,
       parentCentralization: true,
@@ -14,6 +14,7 @@ const options = {
     }
   },
   interaction: {
+    hover: true,
     keyboard: {
       enabled: true,
       speed: {
@@ -62,14 +63,15 @@ const options = {
         background: '#D2E5FF'
       },
     },
-    shape: 'circularImage',
-    size: 20,
-    image: {
-      selected: './baseline_image_black_48dp.png',
-      unselected: './baseline_image_black_48dp.png'
-    },
   },
   groups: {
+    master: {
+      shape: 'circularImage',
+      image: {
+        selected: './_ionicons_svg_md-crop2.svg',
+        unselected: './_ionicons_svg_md-crop2.svg',
+      }
+    },
     pods: {
       shape: 'circularImage',
       image: {
