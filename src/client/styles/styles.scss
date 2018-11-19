@@ -9,51 +9,81 @@ body {
     font-family: Roboto;
 }
 
+// -----------------------------------------
+// modal
 .modalContainer {
-    background: rgba(55, 145, 170, 0.8);
+    background-color: rgba(55, 145, 170, 0.8);
 }
-
-
 .closeButton:hover {
-    background: rgba(105, 181, 202, 0.8);
+    background-color: rgba(105, 181, 202, 0.8);
     color:white;
     // color:rgb(235, 235, 235);
-
 }
-
-.closeButton {
-    width: 100%;
-    display: block;
-    height: 50px;
-    color:rgba(105, 181, 202, 0.8);
-    font-size: 14pt;
-    font-family:sans-serif;
-    font-weight: bold;
-    margin-top: 15px;
+#podModalButton:hover {
+    background-color: #1b7ac7;
 }
-
+#serviceModalButton:hover {
+    background-color: #1b7ac7;
+}
+#ingressModalButton:hover {
+    background-color: #1b7ac7;
+}
+// .closeButton {
+//     width: 100%;
+//     display: block;
+//     height: 50px;
+//     color:rgba(105, 181, 202, 0.8);
+//     font-size: 14pt;
+//     font-family:sans-serif;
+//     font-weight: bold;
+//     margin-top: 15px;
+// }
 .containerinfo {
     text-decoration: underline;
 }
-
 .PVC {
     text-decoration: underline;
 }
-
 .serviceLeft {
     float:left;
 }
-
 .serviceRight {
     float:right;
 }
 
-// Header
-.header {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
-    border-bottom: 1px solid black;
+// --------------------------------------------------
+// Header / App Bar
+// .header {
+//     display: flex;
+//     justify-content: space-between;
+//     padding: 15px;
+//     border-bottom: 1px solid black;
+// }
+
+#kubernetestitle {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+    font-style: italic;
+}
+#appbar {
+    background-image: -webkit-linear-gradient(bottom left, #102139 30%,rgb(233, 227, 202) );
+}
+#viewButton {
+    color: white;
+    background-color: #102139;
+}
+#viewArrow {
+    color: white;
+}
+#menuListButton {
+    background-color: #102139;
+}
+#graphLabel {
+    color: white;
+}
+
+#tableLabel {
+    color: white;
 }
 
 // ---------------------------------------------------
@@ -67,6 +97,7 @@ body {
     color: #F8F8F8;
     text-align: left;
     font-weight: bold;
+    font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
 }
 #handledrawerbutton {
@@ -78,30 +109,28 @@ body {
     background-color: #08182E;
 }
 #legendtitle {
-    color: #b4c5d3;
-}
-#podlabel {
     color: #F8F8F8;
 }
-.divider {
-    color:black;
-}
+
 
 // monitoring 
 .monitoring {
     background-color: #08182E;
 }
+#monitoringlabel {
+    color: #F8F8F8;
+}
 #refreshbutton {
-    background-color: #b4c5d3;
+    background-color: #d3e0eb;
 }
 #refreshbutton:hover {
-    background-color: #6699CC;
+    background-color: #7794b1;
 }
 #monitorbutton {
-    background-color: #b4c5d3;
+    background-color: #d3e0eb;
 }
 #monitorbutton:hover {
-    background-color: #6699CC;
+    background-color: #7794b1;
 }
 
 // directions
@@ -109,7 +138,7 @@ body {
     background-color: #08182E;
 }
 #pageslabel {
-    color: #b4c5d3;
+    color: #F8F8F8;
 }
 
 .viewMenu {
@@ -125,12 +154,10 @@ body {
 .tableRight {
     margin-bottom: 10%;
 }
-
 .monitoring {
     height: 25%;
     padding: 0 15px;
 }
-
 .directions {
     padding: 0 25px;
     text-align: center;

@@ -60,14 +60,14 @@ const options = {
       hover: {
         border: '#2B7CE9',
         background: '#D2E5FF'
-      }
+      },
     },
     shape: 'circularImage',
     size: 20,
     image: {
       selected: './baseline_image_black_48dp.png',
       unselected: './baseline_image_black_48dp.png'
-    }
+    },
   },
   groups: {
     pods: {

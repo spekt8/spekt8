@@ -29,7 +29,7 @@ const Monitoring = (props) => {
   return (
     <div className="monitoring">
       {/* Title */}
-      <Typography variant="h6" style={{color: '#9CABB8' }} className={classes.paper}>Monitoring</Typography>
+      <Typography id="monitoringlabel" variant="h6" className={classes.paper}>Monitoring</Typography>
 
       {/* Sets up Horizontal Row */}
       <Grid

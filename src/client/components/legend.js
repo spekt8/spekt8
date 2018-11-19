@@ -18,7 +18,7 @@ const styles = theme => ({
     width: '100%',
     height: '40%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: 'theme.palette.background.paper',
   },
   typo: {
     margin: theme.spacing.unit,
@@ -71,7 +71,7 @@ class Legend extends React.Component {
               disableTypography
               primary={<Typography variant="body1" style={{color: '#b4c5d3' }}>&nbsp;Pod</Typography>}
             />
-            <ListItemSecondaryAction>
+            <ListItemSecondaryAction >
               <Switch
                 classes={{
                   bar: classes.colorBar
@@ -110,7 +110,7 @@ class Legend extends React.Component {
             <ListItemSecondaryAction >
               <Switch 
                 classes={{
-                  bar: classes.colorBar
+                  bar: classes.colorBar,
                 }}
                 onChange={this.handleToggle('ingress')}
                 checked={this.state.checked.indexOf('ingress') !== -1}

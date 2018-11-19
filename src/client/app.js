@@ -23,6 +23,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import MenuIcon from '@material-ui/icons/Menu';
 import GithubCorner from 'react-github-corner';
+import Divider from '@material-ui/core/Divider';
 
 // drop-down menu
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -44,13 +45,13 @@ const customStyles = {
     left: '73%',
 		right: '2%',
     bottom: '5%',
-		background: 'rgba(55, 145, 170, 0.8)',
-		color: 'white',
+		background: 'white',
+		color: 'black',
 		fontFamily: 'Roboto',
   }
 };
 Modal.setAppElement(document.getElementById('index'))
-//dsfas
+
 class App extends React.Component {
   constructor(props) {
 		super(props);
@@ -118,10 +119,10 @@ class App extends React.Component {
     this.setState({ menuOpen: false });
 	};
 	handleGraphClose = () => {
-		this.setState({ graphTable: 'graph' })
+		this.setState({ graphTable: 'graph', menuOpen: false })
 	}
 	handleTableClose = () => {
-		this.setState({ graphTable: 'table' })
+		this.setState({ graphTable: 'table', menuOpen: false })
 	}
 
 	// when an item is selected, it will open a modal window and show information related to that item 
@@ -221,6 +222,7 @@ class App extends React.Component {
 			type =
 			<Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} style={customStyles} >
 				<h2 ref={subtitle => this.subtitle = subtitle}>{this.state.kind}</h2>
+				<Divider style={{'background-color':'#9CABB8'}} />
 				<div>Name: {this.state.label}</div>
 				<div>Created on: {this.state.timeStamp}</div>
 				<div>Phase: {this.state.statusPhase}</div>
@@ -228,6 +230,7 @@ class App extends React.Component {
 				<div>Target Port: {this.state.targetPort}</div>
 				<div>Cluster IP: {this.state.clusterIP}</div>
 				<Button 
+					id="serviceModalButton"
 					variant="contained" 
 					color="default" 
 					onClick={this.closeModal} 
@@ -240,6 +243,7 @@ class App extends React.Component {
 			type = 
 			<Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} style={customStyles}>
         <h2 ref={subtitle => this.subtitle = subtitle}>{this.state.kind}</h2>
+				<Divider style={{'background-color':'#9CABB8'}} />
         <div>Name: {this.state.metadataName}</div>
 				<div>Created on: {this.state.timeStamp}</div>
 				<div>Phase: {this.state.statusPhase}</div>
@@ -253,7 +257,8 @@ class App extends React.Component {
 				<div className="PVC">Volumes</div>
 				<div>Name: {this.state.volumeName}</div>
 				<div>PVC: {this.state.pvcName ? this.state.pvcName : "Not applicable"}</div>
-        <Button 
+				<Button 
+					id="podModalButton"
 					variant="contained" 
 					color="default" 
 					onClick={this.closeModal} 
@@ -267,17 +272,19 @@ class App extends React.Component {
 			type = 
 			<Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} style={customStyles}>
         <h2 ref={subtitle => this.subtitle = subtitle}>{this.state.kind}</h2>
+				<Divider style={{'background-color':'#9CABB8'}} />
         <div>Name: {this.state.name}</div>
 				<div>Created on: {this.state.timeStamp}</div>
 				<br/>
 				<div className="serviceLeft">Services 
 					<ul>
 				  	{this.state.services.map((obj,i) => {
-						return <li key={i}>{obj.serviceName} {obj.servicePort}</li>
+						return <div key={i}>{obj.serviceName} {obj.servicePort}</div>
 						})}
 					</ul>
 				</div>
-        <Button 
+				<Button 
+					id="ingressModalButton"
 					variant="contained" 
 					color="default" 
 					onClick={this.closeModal} 
@@ -317,10 +324,11 @@ class App extends React.Component {
 								color="primary"
 							>
 							{/* can add any titles here */}
-
+							<div id="kubernetestitle">Kubernetes and Docker Visualization</div>
 								{/* View Menu */}
 								<div className="viewMenu">
 									<Button
+										id="viewButton"
 										buttonRef={node => {
 											this.anchorEl = node;
 										}}
@@ -329,7 +337,7 @@ class App extends React.Component {
 										onClick={this.handleToggle}
 										variant="contained"
 									>
-										<KeyboardArrowDown />View
+										<KeyboardArrowDown id="viewArrow"/>View
 									</Button>
 									<Popper open={menuOpen} anchorEl={this.anchorEl} transition disablePortal>
 										{({ TransitionProps, placement }) => (
@@ -340,9 +348,9 @@ class App extends React.Component {
 											>
 												<Paper>
 													<ClickAwayListener onClickAway={this.handleClose}>
-														<MenuList>
-															<MenuItem onClick={this.handleGraphClose}>Graph</MenuItem>
-															<MenuItem onClick={this.handleTableClose}>Table</MenuItem>
+														<MenuList id="menuListButton">
+															<MenuItem id="graphLabel" onClick={this.handleGraphClose}>Graph</MenuItem>
+															<MenuItem id="tableLabel" onClick={this.handleTableClose}>Table</MenuItem>
 														</MenuList>
 													</ClickAwayListener>
 												</Paper>
@@ -355,7 +363,7 @@ class App extends React.Component {
 						</Toolbar>
 						{/* Github banner on the top right */}
 						<div className={classes.githubWrapper}>
-							<GithubCorner href="https://github.com/spekt8/spekt8" size="65" bannerColor="white" octoColor="#2196f3"/>
+							<GithubCorner href="https://github.com/spekt8/spekt8" size="65" bannerColor="rgb(233, 227, 202)" octoColor="#08182E"/>
 						</div>
           </AppBar>
 					{before}
