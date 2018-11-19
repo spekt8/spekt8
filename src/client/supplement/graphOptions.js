@@ -14,6 +14,7 @@ const options = {
     }
   },
   interaction: {
+    hover: true,
     keyboard: {
       enabled: true,
       speed: {

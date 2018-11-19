@@ -17,7 +17,6 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from './styles/drawerStyles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -32,7 +31,6 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
 
 // import images
 import img from './images/k8slogo.png';
@@ -65,7 +63,12 @@ class App extends React.Component {
 			nodeSelected: false,
 			// pass events object down to our render method which will invoke our selectItem method
 			events: {
-				select: this.selectItem
+				select: this.selectItem,
+				hoverNode: this.hoverNode,
+				blurNode: this.blurNode,
+				dragStart: this.dragStart,
+				dragging: this.dragging,
+				dragEnd: this.dragEnd
 			},
 			modalIsOpen: false,
 			// drawer states
@@ -122,6 +125,23 @@ class App extends React.Component {
 	}
 	handleTableClose = () => {
 		this.setState({ graphTable: 'table', menuOpen: false })
+	}
+
+	// cursor change event methods
+	hoverNode = () => {
+		document.body.style.cursor = "pointer";
+	}
+	blurNode = () => {
+		document.body.style.cursor = "default";
+	}
+	dragStart = () => {
+		document.body.style.cursor = "pointer";
+	}
+	dragging = () => {
+		document.body.style.cursor = "grabbing";
+	}
+	dragEnd = () => {
+		document.body.style.cursor = "default";
 	}
 
 	// when an item is selected, it will open a modal window and show information related to that item 
