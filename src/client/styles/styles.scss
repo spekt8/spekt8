@@ -194,100 +194,115 @@ body {
 //     height: 200px;
 //   }
   
-//   div.vis-network div.vis-navigation div.vis-button.vis-up, 
-//   div.vis-network div.vis-navigation div.vis-button.vis-down, 
-//   div.vis-network div.vis-navigation div.vis-button.vis-left, 
-//   div.vis-network div.vis-navigation div.vis-button.vis-right, 
-//   div.vis-network div.vis-navigation div.vis-button.vis-zoomIn, 
-//   div.vis-network div.vis-navigation div.vis-button.vis-zoomOut, 
-//   div.vis-network div.vis-navigation div.vis-button.vis-zoomExtends {
-//     background-image: none !important;
-//   }
+  div.vis-network div.vis-navigation div.vis-button.vis-up, 
+  div.vis-network div.vis-navigation div.vis-button.vis-down, 
+  div.vis-network div.vis-navigation div.vis-button.vis-left, 
+  div.vis-network div.vis-navigation div.vis-button.vis-right, 
+  div.vis-network div.vis-navigation div.vis-button.vis-zoomIn, 
+  div.vis-network div.vis-navigation div.vis-button.vis-zoomOut, 
+  div.vis-network div.vis-navigation div.vis-button.vis-zoomExtends {
+    background-image: none !important;
+  }
   
-//   div.vis-network div.vis-navigation div.vis-button:hover {
-//     box-shadow: none !important;
-//   }
+  div.vis-network div.vis-navigation div.vis-button:hover {
+    box-shadow: none !important;
+  }
   
-//   .vis-button:after {
-//     font-size: 2em;
-//     color: gray;
-//   }
+  .vis-button:after {
+    font-size: 2em;
+    color: gray;
+  }
   
-//   .vis-button:hover:after {
-//     font-size: 2em;
-//     color: lightgray;
-//   }
-
-//   .vis-button.vis-up {
-//     content: "▲";
-//     top: 3%;
-//   }
-//   .vis-button.vis-up:after {
-//     content: "▲";
-//     top: 3%;
-//   }
-  
-//   .vis-button.vis-down {
-//     content: "▼";
-//     top: 13%;
-//   }
-//   .vis-button.vis-down:after {
-//     content: "▼";
-//     top: 13%;
-//   }
-
-//   .vis-button.vis-left {
-//     content: "◀";
-//     top: 8%;
-//   }
-//   .vis-button.vis-left:after {
-//     content: "◀";
-//     top: 8%;
-//   }
-  
-//   .vis-button.vis-right {
-//     content: "▶";
-//     top: 8%;
-//   }
-//   .vis-button.vis-right:after {
-//     content: "▶";
-//     top: 8%;
-//   }
-  
-//   .vis-button.vis-zoomIn:after {
-//     content: "+";
-//     font-weight: bold;
-//   }
-  
-//   .vis-button.vis-zoomOut:after {
-//     content: "−";
-//     font-weight: bold;
-//   }
-  
-//   .vis-button.vis-zoomExtends:after {
-//     content: "⤧";
-//   }
-
-
+  .vis-button:hover:after {
+    font-size: 2em;
+    color: lightgray;
+  }
 
   .vis-button.vis-up {
-    bottom: 17% !important;  
+    content: "▲";
+    bottom: 17% !important;
   }
+  .vis-button.vis-up:after {
+    content: "▲";
+  }
+  
   .vis-button.vis-down {
+    content: "▼";
     bottom: 11% !important;
   }
+  .vis-button.vis-down:after {
+    content: "▼";
+  }
+
   .vis-button.vis-left {
-    bottom: 11% !important;
+    content: "▶";
+    transform: scale(-1, 1);
+    margin-right: 5px !important;
+    bottom: 11% !important; 
   }
+  .vis-button.vis-left:after {
+    content: "▶";
+  }
+  
   .vis-button.vis-right {
+    content: "▶";
     bottom: 11% !important;
   }
+  .vis-button.vis-right:after {
+    content: "▶";
+  }
+
   .vis-button.vis-zoomIn {
+    content: "+";
     top: 3%;
+    font-weight: bold;
   }
+  .vis-button.vis-zoomIn:after {
+    content: "+";
+    top: 3%;
+    font-weight: bold;
+  }
+  
   .vis-button.vis-zoomOut {
+    content: "−";
     top: 3%;
+    font-weight: bold;
   }
-  div.vis-button.vis-zoomExtends {
+  .vis-button.vis-zoomOut:after {
+    content: "−";
+    top: 3%;
+    font-weight: bold;
+  }
+  
+  .vis-button.vis-zoomExtends {
     top: 9%;
+    content: "⤧";
   }
+  .vis-button.vis-zoomExtends:after {
+    top: 9%;
+    content: "⤧";
+  }
+
+
+
+//   .vis-button.vis-up {
+//     bottom: 17% !important;  
+//   }
+//   .vis-button.vis-down {
+//     bottom: 11% !important;
+//   }
+//   .vis-button.vis-left {
+//     bottom: 11% !important;
+//   }
+//   .vis-button.vis-right {
+//     bottom: 11% !important;
+//   }
+//   .vis-button.vis-zoomIn {
+//     top: 3%;
+//   }
+//   .vis-button.vis-zoomOut {
+//     top: 3%;
+//   }
+//   div.vis-button.vis-zoomExtends {
+//     top: 9%;
+//   }
