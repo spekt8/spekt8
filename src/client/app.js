@@ -33,6 +33,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 
+// import redux
+import { connect } from 'react-redux';
+
 // import images
 import img from './images/k8slogo.png';
 
@@ -48,12 +51,13 @@ const customStyles = {
 		fontFamily: 'Roboto',
   }
 };
-Modal.setAppElement(document.getElementById('index'))
+Modal.setAppElement(document.getElementById('index'));
+
 
 class App extends React.Component {
   constructor(props) {
 		super(props);
-		
+
 		// our state object
 		this.state = {
 			// graph represents our component
@@ -78,6 +82,7 @@ class App extends React.Component {
 			// change view menu open
 			menuOpen: false,
 			graphTable: 'graph',
+			checked: this.props.checked
 		};
 		this.openModal = this.openModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
@@ -88,6 +93,7 @@ class App extends React.Component {
 		this.handleClose = this.handleClose.bind(this);
 		this.handleGraphClose = this.handleGraphClose.bind(this);
 		this.handleTableClose = this.handleTableClose.bind(this);
+		// this.filterNode = this.filterNode.bind(this);
 	}
 
 	// Modal Functions
@@ -143,7 +149,6 @@ class App extends React.Component {
 	}
 	dragEnd = () => {
 		document.body.style.cursor = "default";
-
 	}
 
 	// when an item is selected, it will open a modal window and show information related to that item 
@@ -195,15 +200,55 @@ class App extends React.Component {
 		} 
 	}
 	
+	filterNode() {
+		let { checked } = this.props;
+
+		const edgesCopy = this.state.graph.edges.slice();
+		const nodeCopy = this.state.graph.nodes.map(ele => {
+			if (ele.kind && ele.id) {
+				if (checked.includes(ele.kind.toLowerCase())) {
+					const eleCopy = Object.assign({}, ele);
+					eleCopy.hidden = false;
+					return eleCopy;
+				} else {
+					const eleCopy = Object.assign({}, ele);
+					eleCopy.hidden = true;
+					return eleCopy;
+				}
+			} else {
+				return ele;
+			}	
+		})
+		
+		this.setState({
+			graph: {
+				nodes: nodeCopy,
+				edges: edgesCopy
+			}
+		})
+	}
+
 	// when component is rendered, create fetch request
-	componentDidMount () {
-		fetchData(this.state.graph.nodes, this.state.graph.edges, this.state.graph, this)
+	componentDidMount() {
+		let promise = fetchData(this.state.graph.nodes, this.state.graph.edges, this.state.graph, this)
+		promise.then(() => {
+			this.filterNode();
+		})
+		// setTimeout(() => {
+		// 	this.filterNode();
+		// }, 2000)
+	}
+	
+	componentDidUpdate(prevProps) {
+		if (this.props.checked.length !== prevProps.checked.length) {
+			this.filterNode();
+		}
 	}
 
 	render() {
 		console.log(this.state.graph.nodes);
 		// gets the state and props for drawer
-		const { classes, theme } = this.props;
+		const { classes, theme, checked } = this.props;
     const { anchor, open, menuOpen } = this.state;
 
 		// creates the drawer/left-panel component
@@ -236,6 +281,8 @@ class App extends React.Component {
 		} else if (this.state.graphTable === 'table') {
 			viewStyle = <Table graph={this.state.graph} />
 		}
+
+		// Legend Filter - hides based on the Legend Switches
 
 		// Modal - checks the type of Object when selected
 		let type;
@@ -419,5 +466,13 @@ App.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 };
+
+const mapStateToProps = (state) => {
+  return {
+    checked: state.graphing.checked
+  }
+}
+
+App = connect(mapStateToProps)(App);
 
 export default withStyles(styles, { withTheme: true })(App);

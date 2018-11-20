@@ -167,6 +167,7 @@ body {
 // MAIN VISUALIZATION ITEMS
 .rightSide {
     height: 100%;
+    overflow-y: auto;
 }
 
 #k8sContainer {
@@ -185,3 +186,108 @@ body {
     
 }
 
+
+//
+
+// #mynetwork {
+//     width: 600px;
+//     height: 200px;
+//   }
+  
+//   div.vis-network div.vis-navigation div.vis-button.vis-up, 
+//   div.vis-network div.vis-navigation div.vis-button.vis-down, 
+//   div.vis-network div.vis-navigation div.vis-button.vis-left, 
+//   div.vis-network div.vis-navigation div.vis-button.vis-right, 
+//   div.vis-network div.vis-navigation div.vis-button.vis-zoomIn, 
+//   div.vis-network div.vis-navigation div.vis-button.vis-zoomOut, 
+//   div.vis-network div.vis-navigation div.vis-button.vis-zoomExtends {
+//     background-image: none !important;
+//   }
+  
+//   div.vis-network div.vis-navigation div.vis-button:hover {
+//     box-shadow: none !important;
+//   }
+  
+//   .vis-button:after {
+//     font-size: 2em;
+//     color: gray;
+//   }
+  
+//   .vis-button:hover:after {
+//     font-size: 2em;
+//     color: lightgray;
+//   }
+
+//   .vis-button.vis-up {
+//     content: "▲";
+//     top: 3%;
+//   }
+//   .vis-button.vis-up:after {
+//     content: "▲";
+//     top: 3%;
+//   }
+  
+//   .vis-button.vis-down {
+//     content: "▼";
+//     top: 13%;
+//   }
+//   .vis-button.vis-down:after {
+//     content: "▼";
+//     top: 13%;
+//   }
+
+//   .vis-button.vis-left {
+//     content: "◀";
+//     top: 8%;
+//   }
+//   .vis-button.vis-left:after {
+//     content: "◀";
+//     top: 8%;
+//   }
+  
+//   .vis-button.vis-right {
+//     content: "▶";
+//     top: 8%;
+//   }
+//   .vis-button.vis-right:after {
+//     content: "▶";
+//     top: 8%;
+//   }
+  
+//   .vis-button.vis-zoomIn:after {
+//     content: "+";
+//     font-weight: bold;
+//   }
+  
+//   .vis-button.vis-zoomOut:after {
+//     content: "−";
+//     font-weight: bold;
+//   }
+  
+//   .vis-button.vis-zoomExtends:after {
+//     content: "⤧";
+//   }
+
+
+
+  .vis-button.vis-up {
+    top: 3%;  
+  }
+  .vis-button.vis-down {
+    top: 13%;
+  }
+  .vis-button.vis-left {
+    top: 8%;
+  }
+  .vis-button.vis-right {
+    top: 8%;
+  }
+  .vis-button.vis-zoomIn {
+    top: 3%;
+  }
+  .vis-button.vis-zoomOut {
+    top: 3%;
+  }
+  div.vis-button.vis-zoomExtends {
+    top: 9%;
+  }

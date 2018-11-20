@@ -5,7 +5,7 @@ const options = {
       enabled: true,
       levelSeparation: 100,
       nodeSpacing: 150,
-      treeSpacing: 40,
+      treeSpacing: 60,
       blockShifting: true,
       edgeMinimization: true,
       parentCentralization: true,
@@ -15,6 +15,7 @@ const options = {
   },
   interaction: {
     hover: true,
+    navigationButtons: true,
     keyboard: {
       enabled: true,
       speed: {
@@ -49,6 +50,9 @@ const options = {
   width: '100%',
   height: '100%',
   nodes: {
+    font: {
+      face: 'Roboto',
+    },
     chosen: true,
     borderWidth: 0,
     color: {
