@@ -1,3 +1,8 @@
+import svgmdcrop2 from '../images/_ionicons_svg_md-crop2.svg';
+import svglogocodepen2 from '../images/_ionicons_svg_logo-codepen2.svg';
+import svgmdwifi2 from '../images/_ionicons_svg_md-wifi2.svg';
+import svgmdaperture2 from '../images/_ionicons_svg_md-aperture2.svg';
+
 const options = {
   autoResize: true,
   layout: {
@@ -72,29 +77,29 @@ const options = {
     master: {
       shape: 'circularImage',
       image: {
-        selected: './_ionicons_svg_md-crop2.svg',
-        unselected: './_ionicons_svg_md-crop2.svg',
+        selected: svgmdcrop2,
+        unselected: svgmdcrop2,
       }
     },
     pods: {
       shape: 'circularImage',
       image: {
-        selected: './_ionicons_svg_logo-codepen2.svg',
-        unselected: './_ionicons_svg_logo-codepen2.svg'
+        selected: svglogocodepen2,
+        unselected: svglogocodepen2,
       }
     },
     services: {
       shape: 'circularImage',
       image: {
-        selected: './_ionicons_svg_md-wifi2.svg',
-        unselected: './_ionicons_svg_md-wifi2.svg'
+        selected: svgmdwifi2,
+        unselected: svgmdwifi2
       }
     },
     ingress: {
       shape: 'circularImage',
       image: {
-        selected: './_ionicons_svg_md-aperture2.svg',
-        unselected: './_ionicons_svg_md-aperture2.svg'
+        selected: svgmdaperture2,
+        unselected: svgmdaperture2,
       }
     },
   },

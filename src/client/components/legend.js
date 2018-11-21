@@ -13,9 +13,9 @@ import purple from '@material-ui/core/colors/purple';
 
 
 // image imports
-import PodIcon from '../../../dist/_ionicons_svg_logo-codepen.svg';
-import ServiceIcon from '../../../dist/_ionicons_svg_md-wifi.svg';
-import IngressIcon from '../../../dist/_ionicons_svg_md-aperture.svg';
+import PodIcon from '../images/_ionicons_svg_logo-codepen.svg';
+import ServiceIcon from '../images/_ionicons_svg_md-wifi.svg';
+import IngressIcon from '../images/_ionicons_svg_md-aperture.svg';
 
 // redux
 import { connect } from 'react-redux';
