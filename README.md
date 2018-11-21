@@ -19,10 +19,10 @@ These instructions presume you have a Kubernetes cluster already running.
 An image of the application has been pushed to [Docker Hub](https://hub.docker.com/r/elliotxkim/spekt8/tags/) for those who would like to build the image directly from the public repository. 
 
 We are also providing a deployment file that you can apply directly to your Kubernetes cluster using the command line. 
-```
-kubectl apply -f [spekt8-deployment.yaml](https://github.com/spekt8/spekt8/blob/master/spekt8-deployment.yaml)
-kubectl port-forward deployment/spekt8 3000:3000
-```
+
+* kubectl apply -f [spekt8-deployment.yaml](https://github.com/spekt8/spekt8/blob/master/spekt8-deployment.yaml)
+* kubectl port-forward deployment/spekt8 3000:3000
+
 Then, open your web browser to [http://localhost:3000](http://localhost:3000).
 
 ## How to Use 
@@ -44,7 +44,6 @@ Then, open your web browser to [http://localhost:3000](http://localhost:3000).
 * [React](https://github.com/facebook/react) 
 * [Redux](https://github.com/reduxjs/redux) 
 * [React-Graph-Vis](https://github.com/crubier/react-graph-vis)
-* [Material UI](https://material-ui.com/)
 * [Jest](https://github.com/facebook/jest/)
 
 
