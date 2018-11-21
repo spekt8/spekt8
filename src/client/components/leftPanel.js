@@ -12,6 +12,9 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Divider from '@material-ui/core/Divider';
 
+// import image
+import spekt8logo from '../images/spekt8-logo.png';
+
 const LeftPanel = (props) => {
   return (
     <Drawer
@@ -24,7 +27,8 @@ const LeftPanel = (props) => {
       >
       <div className='leftheader'>
       <div className={props.classes.drawerHeader}>
-        <div id="leftheadertitle" >S P E K T 8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        <div id="leftheadertitle" >S P E K T &nbsp;</div>
+        <img src={spekt8logo} style={{ "height": "20px", "width": "20px"}} />
         <IconButton id="handledrawerbutton" onClick={props.handleDrawerClose}>
           {props.theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
         </IconButton>
