@@ -20,7 +20,7 @@ An image of the application has been pushed to [Docker Hub](https://hub.docker.c
 
 We are also providing a deployment file that you can apply directly to your Kubernetes cluster using the command line. 
 
-* kubectl apply -f [spekt8-deployment.yaml](https://raw.github.com/spekt8/spekt8/blob/master/spekt8-deployment.yaml)
+* kubectl apply -f [spekt8-deployment.yaml](https://raw.githubusercontent.com/spekt8/spekt8/master/spekt8-deployment.yaml)
 * kubectl port-forward deployment/spekt8 3000:3000
 
 Then, open your web browser to [http://localhost:3000](http://localhost:3000).
