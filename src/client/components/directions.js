@@ -30,44 +30,7 @@ const Directions = (props) => {
 
   return (
     <div className="directions">
-      {/* Title */}
-      <Typography id="pageslabel" variant="h6" className={classes.title}>Pages</Typography>
       
-      {/* Top Row for Arrows */}
-      <Grid container 
-        direction="row"
-        justify="space-around"
-        alignItems="center"
-        spacing={24}
-      >
-        <Grid item xs>
-          <ZoomOut style={{color: '#9CABB8' }} />
-        </Grid>
-        <Grid item xs>
-          <ArrowDropUp style={{color: '#9CABB8' }} className={classes.arrowSize}/>
-        </Grid>
-        <Grid item xs>
-          <ZoomIn style={{color: '#9CABB8' }} />
-        </Grid>
-      </Grid>
-
-      {/* Bottom Row for Arrows */}
-      <Grid container 
-        direction="row"
-        justify="space-around"
-        alignItems="center"
-        spacing={24}
-      >
-        <Grid item xs>
-          <ArrowLeft style={{color: '#9CABB8' }} className={classes.arrowSize}/>
-        </Grid>
-        <Grid item xs>
-          <ArrowDropDown style={{color: '#9CABB8' }} className={classes.arrowSize}/>
-        </Grid>
-        <Grid item xs>
-          <ArrowRight style={{color: '#9CABB8' }} className={classes.arrowSize}/>
-        </Grid>
-      </Grid>
       
     </div>
   )
