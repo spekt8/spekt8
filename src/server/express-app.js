@@ -33,6 +33,8 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(express.static(path.join(__dirname, '../../dist')))
+
 app.get('/', (req, res) => {
   console.log('serving index.html from ', __dirname)
   return res.status(200).sendFile(path.join(__dirname, '../../dist/index.html'))
