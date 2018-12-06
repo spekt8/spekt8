@@ -1,5 +1,5 @@
 /**
- * @description main app page
+ * @description main app 
  */
 
 import React from 'react';
