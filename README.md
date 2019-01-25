@@ -23,10 +23,11 @@ We are also providing a deployment file that you can apply directly to your Kube
 * kubectl apply -f [spekt8-deployment.yaml](https://raw.githubusercontent.com/spekt8/spekt8/master/spekt8-deployment.yaml)
 * kubectl port-forward deployment/spekt8 3000:3000
 
-Then, open your web browser to [http://localhost:3000](http://localhost:3000).
-
 In addition, in order to allow reading resources of the API, you must configure a set of permissions. We have set up a YAML file using RBAC authorization which you can apply directly to your Kubernetes cluster using the command line:
 * kubectl apply -f [fabric8-rbac.yaml](https://raw.githubusercontent.com/spekt8/spekt8/master/fabric8-rbac.yaml).
+
+Then, open your web browser to [http://localhost:3000](http://localhost:3000).
+
 
 ## How to Use 
 
