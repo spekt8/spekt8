@@ -19,10 +19,6 @@ const k8sApi = kc.makeApiClient(k8s.Core_v1Api);
 // optional: daemonset, and network policy as well as replica set if needed
 const k8sApi2 = kc.makeApiClient(k8s.Extensions_v1beta1Api);
 
-// Other Lists:
-// AppsV1beta1Api: https://github.com/kubernetes-client/java/blob/master/kubernetes/docs/AppsV1beta1Api.md
-// - statefulset;
-
 
 // use statements
 app.use(bodyParser.json());
