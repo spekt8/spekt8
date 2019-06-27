@@ -2,7 +2,7 @@
 FROM arm32v7/node:8-slim
 
 # create a directory for client
-RUN mkdir -p /home/node/app
+RUN "mkdir -p /home/node/app"
 WORKDIR /home/node/app
 
 # install app dependencies
