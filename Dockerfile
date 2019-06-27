@@ -1,5 +1,5 @@
 # version 8 of node
-FROM node:8
+FROM arm32v7/node:8-slim
 
 # create a directory for client
 RUN mkdir -p /usr/src/app
