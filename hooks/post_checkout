@@ -1,0 +1,10 @@
+#!/bin/bash
+# downloads a local copy of qemu on docker-hub build machines
+QEMU_USER_STATIC_DOWNLOAD_URL="https://github.com/multiarch/qemu-user-static/releases/download"
+QEMU_USER_STATIC_LATEST_TAG=$(curl -s https://api.github.com/repos/multiarch/qemu-user-static/tags \
+    | grep 'name.*v[0-9]' \
+    | head -n 1 \
+    | cut -d '"' -f 4)
+
+curl -SL "${QEMU_USER_STATIC_DOWNLOAD_URL}/${QEMU_USER_STATIC_LATEST_TAG}/x86_64_qemu-arm-static.tar.gz" \
+    | tar xzv
