@@ -1,8 +1,6 @@
 .gitignore
 README.md
 .DS_Store
-k8sed
-k8sgrider
 Dockerfile
 package-lock.json
 node_modules
