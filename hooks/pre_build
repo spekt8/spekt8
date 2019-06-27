@@ -1,4 +1,9 @@
+
 #!/bin/bash
-# Register qemu-*-static for all supported processors except the
-# current one, but also remove all registered binfmt_misc before
+
+BUILD_ARCH=$(echo "${DOCKERFILE_PATH}" | cut -d '.' -f 2)
+
+[ "${BUILD_ARCH}" == "Dockerfile" ] && \
+{ echo 'qemu-user-static: Registration not required for current arch'; exit 0; }
+
 docker run --rm --privileged multiarch/qemu-user-static:register --reset

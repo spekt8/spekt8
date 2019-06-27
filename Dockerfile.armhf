@@ -1,9 +1,10 @@
-# version 8 of node
-FROM node:8
+FROM arm32v7/node:8-slim
+
+COPY qemu-arm-static /usr/bin/
 
 # create a directory for client
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN mkdir -p /home/node/app
+WORKDIR /home/node/app
 
 # install app dependencies
 COPY package*.json ./
@@ -15,4 +16,5 @@ COPY . .
 
 # bind to port 3000
 EXPOSE 3000
+
 CMD ["npm", "run", "server"]
