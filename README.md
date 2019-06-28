@@ -10,3 +10,8 @@ You can pull the latest from [hanzov69/arm32v7-spekt8:latest](https://cloud.dock
 ### Deployment
 - kubectl apply -f [spekt8-deployment-armhf.yaml](https://github.com/hanzov69/spekt8/blob/master/spekt8-deployment-armhf.yaml)
 - kubectl port-forward deployment/spekt8 3000:3000
+
+In addition, in order to allow reading resources of the API, you must configure a set of permissions. We have set up a YAML file using RBAC authorization which you can apply directly to your Kubernetes cluster using the command line:
+* kubectl apply -f [fabric8-rbac.yaml](https://raw.githubusercontent.com/hanzov69/spekt8/master/fabric8-rbac.yaml).
+
+Then, open your web browser to [http://localhost:3000](http://localhost:3000).
