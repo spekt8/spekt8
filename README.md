@@ -15,3 +15,11 @@ In addition, in order to allow reading resources of the API, you must configure 
 * kubectl apply -f [fabric8-rbac.yaml](https://raw.githubusercontent.com/hanzov69/spekt8/master/fabric8-rbac.yaml).
 
 Then, open your web browser to [http://localhost:3000](http://localhost:3000).
+
+**Note**: if you're like most of us, accessing this via localhost isn't really a great option. Here is what you can do instead, based off of [mari6724](https://github.com/mari6274)'s [suggestion](https://github.com/spekt8/spekt8/issues/10#issuecomment-502477723)
+
+On your actual localhost (desktop, laptop, whatever) create an SSH tunnel ala
+
+`ssh -L 3000:127.0.0.1:3000 user@k8-master` 
+
+Obviously replace with actual username and kubernetes master address, include your ssh key if that's how you handle auth.
