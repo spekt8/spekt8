@@ -1,0 +1,8 @@
+#!/bin/bash
+
+docker build \
+    --file "${DOCKERFILE_PATH}" \
+    --build-arg BUILD_DATE="$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
+    --build-arg VCS_REF="$(git rev-parse --short HEAD)" \
+    --tag "$IMAGE_NAME" \
+    .
