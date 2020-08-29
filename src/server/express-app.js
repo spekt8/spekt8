@@ -85,7 +85,10 @@ app.get('/daemonset', (req, res) => {
   k8sApi2.listNamespacedDaemonSet('default')
     .then((re) => {
       res.json(re.body);
-    });
+    })
+    .catch((err) => {
+      res.send(err);
+    })
 });
 
 
