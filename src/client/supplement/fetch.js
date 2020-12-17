@@ -124,30 +124,30 @@ const fetchData = (nodes, edges, graph, that) => {
 				}
 
 				/* DAEMONSET */
-				// for (let i = 0; i < daemonsetObject.items.length; i += 1) {
-				// 	const newDaemonSetObject = {};
-				// 	newDaemonSetObject.id = i + 4000;
-				// 	newDaemonSetObject.kind = "DaemonSet";
-				// 	newDaemonSetObject.label = "DaemonSet";
-				// 	newDaemonSetObject.timeStamp = daemonsetObject.items[i].metadata.creationTimestamp;
-				// 	newDaemonSetObject.name = daemonsetObject.items[i].metadata.name;
-				// 	newDaemonSetObject.namespace = daemonsetObject.items[i].metadata.namespace;
-				// 	// looping through containers
-				// 	let containersPath = daemonsetObject.items[i].spec.template.spec.containers; // this is containers array
-				// 	newDaemonSetObject.containers = [];
-				// 	for (let j = 0; j < containersPath.length; j += 1) {
-				// 		const containerObj = {};
-				// 		containerObj.name = containersPath[j].name;
-				// 		containerObj.image = containersPath[j].image;
-				// 		newDaemonSetObject.containers.push(containerObj);
-				// 	}
-				// 	// design the ingress node
-				// 	newDaemonSetObject.shape = "diamond";
-				// 	newDaemonSetObject.color = "teal";
-				// 	newDaemonSetObject.group = "daemonset";
-				// 	newGraph.nodes.push(newDaemonSetObject);
-				// 	daemonsetArray.push(newDaemonSetObject);
-				// }
+				 for (let i = 0; i < daemonsetObject.items.length; i += 1) {
+				 	const newDaemonSetObject = {};
+				 	newDaemonSetObject.id = i + 4000;
+				 	newDaemonSetObject.kind = "DaemonSet";
+				 	newDaemonSetObject.label = "DaemonSet";
+				 	newDaemonSetObject.timeStamp = daemonsetObject.items[i].metadata.creationTimestamp;
+				 	newDaemonSetObject.name = daemonsetObject.items[i].metadata.name;
+				 	newDaemonSetObject.namespace = daemonsetObject.items[i].metadata.namespace;
+				 	// looping through containers
+				 	let containersPath = daemonsetObject.items[i].spec.template.spec.containers; // this is containers array
+				 	newDaemonSetObject.containers = [];
+				 	for (let j = 0; j < containersPath.length; j += 1) {
+				 		const containerObj = {};
+				 		containerObj.name = containersPath[j].name;
+				 		containerObj.image = containersPath[j].image;
+				 		newDaemonSetObject.containers.push(containerObj);
+				 	}
+				 	// design the ingress node
+				 	newDaemonSetObject.shape = "diamond";
+				 	newDaemonSetObject.color = "teal";
+				 	newDaemonSetObject.group = "daemonset";
+				 	newGraph.nodes.push(newDaemonSetObject);
+				 	daemonsetArray.push(newDaemonSetObject);
+				 }
 
 				/* SERVICE - POD CONNECTIONS */
 				// this checks whether the selector from the service object matches the labels from the pods object
