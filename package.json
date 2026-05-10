@@ -1,7 +1,7 @@
 {
-  "name": "docker-kubernetes-udemy3",
+  "name": "spekt8",
   "version": "1.0.0",
-  "description": "",
+  "description": "Visualize your Kubernetes cluster in real time",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
@@ -10,7 +10,7 @@
     "server": "nodemon src/server/server.js"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.5.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.8",
