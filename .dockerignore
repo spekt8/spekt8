@@ -1,10 +1,11 @@
+.git
+.github
 .gitignore
+.dockerignore
 README.md
+LICENSE
 .DS_Store
+node_modules
+dist
 k8sed
 k8sgrider
-Dockerfile
-package-lock.json
-node_modules
-.dockerignore
-LICENSE

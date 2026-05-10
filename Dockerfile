@@ -1,18 +1,19 @@
-# version 8 of node
-FROM node:8
+# syntax=docker/dockerfile:1
 
-# create a directory for client
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-
-# install app dependencies
-COPY package*.json ./
-
-RUN npm install 
-
-# bundle app source
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY package.json ./
+RUN npm install --no-audit --no-fund
 COPY . .
+RUN npm run build
 
-# bind to port 3000
+FROM node:20-alpine
+WORKDIR /app
+COPY package.json ./
+RUN npm install --omit=dev --no-audit --no-fund \
+    && npm cache clean --force
+COPY src/server ./src/server
+COPY --from=builder /app/dist ./dist
+USER node
 EXPOSE 3000
-CMD ["npm", "run", "server"]
+CMD ["node", "src/server/server.js"]
