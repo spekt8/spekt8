@@ -1,0 +1,35 @@
+# Least-privilege RBAC for spekt8. Replaces a previous cluster-admin binding (issue #17).
+# Apply this BEFORE spekt8-deployment.yaml — the Deployment uses this ServiceAccount.
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: spekt8
+  namespace: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: spekt8-reader
+  namespace: default
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "services"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["extensions"]
+    resources: ["ingresses", "deployments", "daemonsets"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: spekt8-reader
+  namespace: default
+subjects:
+  - kind: ServiceAccount
+    name: spekt8
+    namespace: default
+roleRef:
+  kind: Role
+  name: spekt8-reader
+  apiGroup: rbac.authorization.k8s.io

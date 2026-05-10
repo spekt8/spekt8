@@ -12,6 +12,7 @@ spec:
       labels:
         component: spekt8
     spec:
+      serviceAccountName: spekt8
       containers:
         - name: spekt8
           image: elliotxkim/spekt8
