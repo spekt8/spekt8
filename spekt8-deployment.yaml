@@ -15,6 +15,6 @@ spec:
       serviceAccountName: spekt8
       containers:
         - name: spekt8
-          image: elliotxkim/spekt8
+          image: camillelambert/spekt8:latest
           ports:
             - containerPort: 3000

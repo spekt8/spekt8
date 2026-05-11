@@ -14,9 +14,9 @@ While the current app does not directly visualize any controllers (such as Deplo
 In addition to these views, nodes can be presented either in graphical or in table mode. The graphical mode is practical for obtaining a quick visual overview of your app, and its infrastructure and connections between all of the nodes. And when you switch to table mode, nodes are presented in a convenient list that displays the resources being consumed by processes, containers, and hosts.
 
 ## Deployment
-These instructions presume you have a Kubernetes cluster already running. 
+These instructions presume you have a Kubernetes cluster already running.
 
-An image of the application has been pushed to [Docker Hub](https://hub.docker.com/r/elliotxkim/spekt8/tags/) for those who would like to build the image directly from the public repository. 
+A maintained multi-architecture image (`linux/amd64`, `linux/arm64`, `linux/arm/v7`) is published to Docker Hub at [`camillelambert/spekt8`](https://hub.docker.com/r/camillelambert/spekt8). It's automatically rebuilt and pushed on every commit to `master`. Tags include `:latest` and per-commit `:sha-*`.
 
 SPEKT8 needs read access to a few Kubernetes resources (pods, services, ingresses, deployments, daemonsets) in the `default` namespace. Apply the RBAC manifest first to create a dedicated ServiceAccount with least-privilege read-only access, then apply the Deployment:
 
